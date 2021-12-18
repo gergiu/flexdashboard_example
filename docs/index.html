@@ -1,0 +1,2698 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+<title>Untitled</title>
+
+<meta property="og:title" content="Untitled" />
+
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
+
+<link rel="icon" href="data:image/x-icon;" type="image/x-icon">
+
+
+<script type="text/javascript">
+window.FlexDashboardComponents = [];
+</script>
+
+<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/stickytableheaders-0.1.19/jquery.stickytableheaders.min.js"></script>
+<script src="site_libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<script src="site_libs/plotly-binding-4.9.3/plotly.js"></script>
+<script src="site_libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="site_libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
+<script src="site_libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
+<link href="site_libs/plotly-htmlwidgets-css-1.57.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="site_libs/plotly-main-1.57.1/plotly-latest.min.js"></script>
+<style type="text/css">
+
+/*
+ Dashboard CSS from Keen IO Dashboards
+ (https://github.com/keen/dashboards)
+*/
+
+body {
+  background: #f2f2f2;
+  padding: 60px 0 0 8px; /* padding-top overridden by theme */
+}
+
+body hr {
+  border-color: #d7d7d7;
+  margin: 10px 0;
+}
+
+.navbar-inverse .navbar-nav > li > a,
+.navbar .navbar-brand {
+  text-decoration: none;
+}
+
+.navbar-logo {
+  margin-top: 1px;
+}
+
+.navbar-logo img {
+  margin-right: 12px;
+}
+
+.navbar-author {
+  margin-left: 10px;
+  font-size: 15px;
+}
+
+.navbar .dropdown-menu .fa {
+  min-width: 20px;
+}
+
+.navbar .dropdown-menu {
+  min-width: 150px;
+  max-height: 500px;
+  overflow: auto;
+}
+
+.chart-wrapper,
+.nav-tabs-custom,
+.sbframe-commentary
+{
+  background: #fff;
+  border: 1px solid #e2e2e2;
+  border-radius: 3px;
+  margin-bottom: 8px;
+  margin-right: 8px;
+}
+
+.chart-title {
+  border-bottom: 1px solid #d7d7d7;
+  color: #666;
+  font-size: 14px;
+  font-weight: 300;
+  padding: 7px 10px 4px;
+}
+
+.chart-wrapper .chart-title:empty {
+  display: none;
+}
+
+.chart-wrapper .chart-stage {
+  overflow: hidden;
+  padding: 5px 10px;
+  position: relative;
+}
+
+.chart-wrapper .chart-notes {
+  background: #fbfbfb;
+  border-top: 1px solid #e2e2e2;
+  color: #808080;
+  font-size: 12px;
+  padding: 8px 10px 5px;
+}
+
+/*
+ CSS for handling flexbox layout
+*/
+
+#dashboard-container {
+  visibility: hidden;
+}
+
+.tab-content>.dashboard-page-wrapper.active {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.dashboard-page-wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.dashboard-row-orientation {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.dashboard-row {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.dashboard-row-flex {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.dashboard-column-orientation {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.dashboard-column {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.chart-wrapper-flex {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.chart-stage-flex {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  position: relative;
+}
+
+.chart-shim {
+  position: absolute;
+  left: 8px; top: 8px; right: 8px; bottom: 8px;
+}
+
+.no-padding .chart-shim {
+  left: 0; top: 0; right: 0; bottom: 0;
+}
+
+.flowing-content-shim {
+  overflow: auto;
+  left: 0; top: 0; right: 0; bottom: 0;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.flowing-content-container {
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.chart-stage .table-bordered {
+  border: none;
+}
+
+.chart-stage .table-bordered > tbody > tr > th,
+.chart-stage .table-bordered > tfoot > tr > th,
+.chart-stage .table-bordered > tbody > tr > td,
+.chart-stage .table-bordered > tfoot > tr > td {
+  border: none;
+}
+
+.chart-stage .table-bordered > tbody > tr > td {
+  border-top: 1px solid #dddddd;
+}
+
+.chart-stage .table-bordered > thead > tr > th {
+  border: none;
+  border-bottom: 2px solid #dddddd;
+}
+
+.bootstrap-table table>thead {
+  background-color: #fff;
+}
+
+.bootstrap-table table.data,
+.bootstrap-table table.shiny-table {
+  width: inherit !important;
+}
+
+.bootstrap-table table.data>tbody>tr>th,
+.bootstrap-table table.shiny-table>tbody>tr>th {
+  border-top: none;
+  border-bottom: 2px solid #dddddd;
+  padding: 5px;
+}
+
+.bootstrap-table .data td[align=right] {
+  font-family: inherit;
+}
+
+.chart-wrapper form {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.shiny-input-container label {
+  font-weight: normal;
+}
+
+.chart-stage .html-widget {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.chart-stage .html-widget-static-bound {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.chart-stage .shiny-bound-output {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Omit display of empty paragraphs */
+
+.chart-shim>p:empty {
+  display: none;
+}
+
+.chart-stage>p:empty {
+  display: none;
+}
+
+/* Omit display of special knitr options div*/
+
+.chart-stage .knitr-options {
+  display: none;
+}
+
+/* Automatically resizing images */
+
+.image-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0;
+}
+
+.image-container img {
+  opacity: 0;
+  overflow: hidden;
+}
+
+/* Value box */
+
+.value-box {
+  border-radius: 2px;
+  position: relative;
+  display: block;
+  margin-right: 8px;
+  margin-bottom: 8px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.value-box > .inner {
+  padding: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.value-box .value {
+  font-size: 38px;
+  font-weight: bold;
+  margin: 0 0 3px 0;
+  white-space: nowrap;
+  padding: 0;
+}
+
+.value-box .caption {
+  font-size: 15px;
+}
+.value-box .caption > small {
+  display: block;
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+.value-box .icon i {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 80px;
+  color: rgba(0, 0, 0, 0.15);
+}
+
+.linked-value:hover {
+  cursor: pointer;
+}
+
+.value-box.linked-value:hover {
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* STORYBOARD */
+
+.storyboard-nav button {
+  background: transparent;
+  border: 0;
+  opacity: .3;
+  outline: none;
+  padding: 0;
+}
+
+.storyboard-nav button:hover,
+.storyboard-nav button:hover {
+  opacity: .5;
+}
+
+.storyboard-nav button:disabled,
+.storyboard-nav button:disabled {
+  opacity: .1;
+}
+
+.storyboard-nav .sbnext,
+.storyboard-nav .sbprev {
+  float: left;
+  width: 2%;
+  height: 120px;
+  font-size: 50px;
+}
+
+.storyboard-nav .sbprev {
+  text-align: left;
+  width: 2%;
+}
+
+.storyboard-nav .sbnext {
+  float: right;
+  text-align: right;
+  margin-right: 8px;
+}
+
+.storyboard-nav .sbframelist {
+  margin: 0 auto;
+  width: 94%;
+  height: 120px;
+  overflow: hidden;
+  text-shadow: none;
+  margin-bottom: 8px;
+}
+
+.storyboard-nav .sbframelist ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.storyboard-nav .sbframelist ul li {
+  float: left;
+  width: 270px;
+  height: 100%;
+  padding: 10px 10px 10px 10px;
+  margin-right: 8px;
+  background: #fff;
+  border: 1px solid #e2e2e2;
+  border-radius: 3px;
+  color: #3a3c47;
+  text-align: left;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.storyboard-nav .sbframelist ul li:last-child {
+  margin-right: 0px;
+}
+
+.storyboard-nav .sbframelist ul li.active {
+  color: #fff;
+  background: #B8B8B8;
+}
+
+.sbframe-commentary {
+  width: 300px;
+  background: #fbfbfb;
+  font-size: 14px;
+}
+
+.sbframe-commentary ul {
+  padding-left: 22px;
+}
+
+.sbframe.active {
+  display: flex;
+}
+
+.sbframe:not(.active) {
+  display: none;
+}
+
+/* NAV TABS */
+
+.nav-tabs-custom > .nav-tabs {
+  margin: 0;
+  border-bottom: 1px solid #d7d7d7;
+  color: #666;
+  font-size: 14px;
+  font-weight: 300;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+.nav-tabs-custom > .nav-tabs > li {
+  border-top: 3px solid transparent;
+  margin-bottom: -1px;
+  margin-right: 5px;
+}
+.nav-tabs-custom > .nav-tabs > li > a,
+.nav-tabs-custom > .nav-tabs > li > a:active {
+  color: #666;
+  font-weight: 300;
+  font-size: 14px;
+  border-radius: 0;
+  padding: 3px 10px 5px;
+  text-transform: none;
+}
+
+.nav-tabs-custom > .nav-tabs > li:not(.active) > a {
+  border-bottom-color: transparent;
+}
+
+.nav-tabs-custom > .nav-tabs > li > a.text-muted {
+  color: #999;
+}
+.nav-tabs-custom > .nav-tabs > li > a,
+.nav-tabs-custom > .nav-tabs > li > a:hover {
+  background: transparent;
+  margin: 0;
+}
+.nav-tabs-custom > .nav-tabs > li > a:hover {
+  color: #999;
+}
+.nav-tabs-custom > .nav-tabs > li:not(.active) > a:hover,
+.nav-tabs-custom > .nav-tabs > li:not(.active) > a:focus,
+.nav-tabs-custom > .nav-tabs > li:not(.active) > a:active {
+  border-color: transparent;
+}
+.nav-tabs-custom > .nav-tabs > li.active {
+  border-top-color: #3c8dbc;
+}
+.nav-tabs-custom > .nav-tabs > li.active > a,
+.nav-tabs-custom > .nav-tabs > li.active:hover > a {
+  background-color: #fff;
+  color: #666;
+}
+.nav-tabs-custom > .nav-tabs > li.active > a {
+  border-top-color: transparent;
+  border-left-color: #d7d7d7;
+  border-right-color: #d7d7d7;
+}
+.nav-tabs-custom > .nav-tabs > li:first-of-type {
+  margin-left: 0;
+}
+.nav-tabs-custom > .nav-tabs > li:first-of-type.active > a {
+  border-left-color: transparent;
+}
+.nav-tabs-custom > .nav-tabs.pull-right {
+  float: none !important;
+}
+.nav-tabs-custom > .nav-tabs.pull-right > li {
+  float: right;
+}
+.nav-tabs-custom > .nav-tabs.pull-right > li:first-of-type {
+  margin-right: 0;
+}
+.nav-tabs-custom > .nav-tabs.pull-right > li:first-of-type > a {
+  border-left-width: 1px;
+}
+.nav-tabs-custom > .nav-tabs.pull-right > li:first-of-type.active > a {
+  border-left-color: #d7d7d7;
+  border-right-color: transparent;
+}
+.nav-tabs-custom > .nav-tabs > li.header {
+  line-height: 35px;
+  padding: 0 10px;
+  font-size: 20px;
+  color: #666;
+}
+.nav-tabs-custom > .nav-tabs > li.header > .fa,
+.nav-tabs-custom > .nav-tabs > li.header > .glyphicon,
+.nav-tabs-custom > .nav-tabs > li.header > .ion {
+  margin-right: 5px;
+}
+.nav-tabs-custom > .tab-content {
+  background: #fff;
+  padding: 0;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.nav-tabs-custom > .tab-content > .chart-wrapper {
+  background: #fff;
+  border: none;
+  margin: 0;
+}
+
+
+.nav-tabs-custom > .tab-content > .active {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.nav-tabs-custom .dropdown.open > a:active,
+.nav-tabs-custom .dropdown.open > a:focus {
+  background: transparent;
+  color: #999;
+}
+
+
+@media (max-width: 767px) {
+  .value-box {
+    text-align: center;
+    margin-right: 8px;
+  }
+  .value-box .icon {
+    display: none;
+  }
+}
+
+/* Fixed position sidebar */
+
+.section.sidebar {
+  position: fixed;
+  top: 51px; /* overridden by theme */
+  left: 0;
+  bottom: 0;
+  border-right: 1px solid #e2e2e2;
+  background-color: white; /* overridden by theme */
+  padding-left: 10px;
+  padding-right: 10px;
+  visibility: hidden;
+  overflow: auto;
+}
+
+.section.sidebar form p:first-child {
+  margin-top: 10px;
+}
+
+/* Embedded source code */
+
+#flexdashboard-source-code {
+  display: none;
+}
+
+.featherlight-content #flexdashboard-source-code {
+  display: inline-block;
+}
+
+.featherlight-content {
+  width: 80%;
+  max-width: 800px;
+  padding: 0 !important;
+  border-bottom: none !important;
+}
+
+.featherlight:last-of-type {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.featherlight-inner {
+  width: 100%;
+}
+
+.featherlight-content pre {
+  margin: 0;
+  border: 0;
+  background: #fff;
+  font-size: 12px;
+}
+
+.unselectable {
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: -moz-none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+#flexdashboard-source-code code {
+  -ms-user-select: text;
+  -webkit-user-select: text;
+  -khtml-user-select: text;
+  -moz-user-select: text;
+  -o-user-select: text;
+  user-select: text;
+}
+
+/* DataTables Tweaks */
+
+.dataTables_filter input[type="search"] {
+  -webkit-appearance: searchfield;
+  outline: none;
+}
+
+.dataTables_wrapper.no-footer
+.dataTables_info {
+  padding-top: 0;
+}
+
+
+table.dataTable thead th {
+  border-bottom: 1px solid #d7d7d7;
+}
+
+.dataTables_wrapper.no-footer .dataTables_scrollBody {
+  border-bottom: 1px solid #d7d7d7;
+}
+
+/* Mobile phone only CSS */
+
+.desktop-layout div.section.mobile {
+  display: none;
+}
+
+.mobile-layout div.section.no-mobile {
+  display: none;
+}
+
+.mobile-figure {
+  display: none;
+}
+
+
+
+body {
+  padding-top: 60px;
+}
+
+.section.sidebar {
+  top: 51px;
+  background-color: rgba(39, 128, 227, 0.1);
+}
+
+.value-box {
+  color: #f9f9f9;
+}
+
+.bg-primary {
+  background-color: rgba(39, 128, 227, 0.7);
+}
+
+.storyboard-nav .sbframelist ul li.active {
+  background-color: rgba(39, 128, 227, 0.7);
+}
+
+.nav-tabs-custom > .nav-tabs > li.active {
+  border-top-color: rgba(39, 128, 227, 0.7);
+}
+
+.bg-info {
+  background-color: rgba(153, 84, 187, 0.7);
+}
+
+.bg-warning {
+  background-color: rgba(255, 117, 24, 0.7);
+}
+
+.bg-danger {
+  background-color: rgba(255, 0, 57, 0.7);
+}
+
+.bg-success {
+  background-color: rgba(63, 182, 24, 0.7);
+}
+
+.chart-title {
+  font-weight: 500;
+}
+
+.nav-tabs-custom > .nav-tabs > li > a,
+.nav-tabs-custom > .nav-tabs > li > a:active {
+  font-weight: 500;
+}
+
+@media only screen and (min-width: 768px) {
+html, body {
+  height: 100%;
+}
+
+#dashboard-container {
+  height: 100%;
+}
+}
+</style>
+
+
+
+</head>
+
+<body>
+
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<div class="container-fluid">
+<div class="navbar-header">
+
+<button id="navbar-button" type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</button>
+
+<span class="navbar-logo pull-left">
+  
+</span>
+<span class="navbar-brand">
+  Untitled
+  <span class="navbar-author">
+        </span>
+</span>
+
+</div>
+<div id="navbar" class="navbar-collapse collapse">
+<ul class="nav navbar-nav navbar-left">
+</ul>
+<ul class="nav navbar-nav navbar-right">
+</ul>
+</div><!--/.nav-collapse-->
+</div><!--/.container-->
+</div><!--/.navbar-->
+
+<script type="text/javascript">
+
+
+var FlexDashboard = (function () {
+
+  // initialize options
+  var _options = {};
+
+  var FlexDashboard = function() {
+
+    // default options
+    _options = $.extend(_options, {
+      theme: "cosmo",
+      fillPage: false,
+      orientation: 'columns',
+      storyboard: false,
+      defaultFigWidth: 576,
+      defaultFigHeight: 461,
+      defaultFigWidthMobile: 360,
+      defaultFigHeightMobile: 461,
+      isMobile: false,
+      isPortrait: false,
+      resize_reload: true
+    });
+  };
+
+  function init(options) {
+
+    // extend default options
+    $.extend(true, _options, options);
+
+    // add ids to sections that don't have them (pandoc won't assign ids
+    // to e.g. sections with titles consisting of only chinese characters)
+    var nextId = 1;
+    $('.level1:not([id]),.level2:not([id]),.level3:not([id])').each(function() {
+      $(this).attr('id', 'dashboard-' + nextId++);
+    });
+
+    // find navbar items
+    var navbarItems = $('#flexdashboard-navbar');
+    if (navbarItems.length)
+      navbarItems = JSON.parse(navbarItems.html());
+    addNavbarItems(navbarItems);
+
+    // find the main dashboard container
+    var dashboardContainer = $('#dashboard-container');
+
+    // resolve mobile classes
+    resolveMobileClasses(dashboardContainer);
+
+    // one time global initialization for components
+    componentsInit(dashboardContainer);
+
+    // look for a global sidebar
+    var globalSidebar = dashboardContainer.find(".section.level1.sidebar");
+    if (globalSidebar.length > 0) {
+
+      // global layout for fullscreen displays
+      if (!isMobilePhone()) {
+
+         // hoist it up to the top level
+         globalSidebar.insertBefore(dashboardContainer);
+
+         // lay it out (set width/positions)
+         layoutSidebar(globalSidebar, dashboardContainer);
+
+      // tuck sidebar into first page for mobile phones
+      } else {
+
+        // convert it into a level3 section
+        globalSidebar.removeClass('sidebar');
+        globalSidebar.removeClass('level1');
+        globalSidebar.addClass('level3');
+        var h1 = globalSidebar.children('h1');
+        var h3 = $('<h3></h3>');
+        h3.append(h1.contents());
+        h3.insertBefore(h1);
+        h1.detach();
+
+        // move it into the first page
+        var page = dashboardContainer.find('.section.level1').first();
+        if (page.length > 0)
+          page.prepend(globalSidebar);
+      }
+    }
+
+    // look for pages to layout
+    var pages = $('div.section.level1');
+    if (pages.length > 0) {
+
+        // find the navbar and collapse on clicked
+        var navbar = $('#navbar');
+        navbar.on("click", "a[data-toggle!=dropdown]", null, function () {
+           navbar.collapse('hide');
+        });
+
+        // envelop the dashboard container in a tab content div
+        dashboardContainer.wrapInner('<div class="tab-content"></div>');
+
+        pages.each(function(index) {
+
+          // lay it out
+          layoutDashboardPage($(this));
+
+          // add it to the navbar
+          addToNavbar($(this), index === 0);
+
+        });
+
+    } else {
+
+      // remove the navbar and navbar button if we don't
+      // have any navbuttons
+      if (navbarItems.length === 0) {
+        $('#navbar').remove();
+        $('#navbar-button').remove();
+      }
+
+      // add the storyboard class if requested
+      if (_options.storyboard)
+        dashboardContainer.addClass('storyboard');
+
+      // layout the entire page
+      layoutDashboardPage(dashboardContainer);
+    }
+
+    // if we are in shiny we need to trigger a window resize event to
+    // force correct layout of shiny-bound-output elements
+    if (isShinyDoc())
+      $(window).trigger('resize');
+
+    // make main components visible
+    $('.section.sidebar').css('visibility', 'visible');
+    dashboardContainer.css('visibility', 'visible');
+
+    // handle location hash
+    handleLocationHash();
+
+    // intialize prism highlighting
+    initPrismHighlighting();
+
+    // record mobile and orientation state then register a handler
+    // to refresh if resize_reload is set to true and it changes
+    _options.isMobile = isMobilePhone();
+    _options.isPortrait = isPortrait();
+    if (_options.resize_reload) {
+      $(window).on('resize', function() {
+        if (_options.isMobile !== isMobilePhone() ||
+            _options.isPortrait !== isPortrait()) {
+          window.location.reload();
+        }
+      });
+    } else {
+      // if in desktop mode and resizing to mobile, make sure the heights are 100%
+      // This enforces what `fillpage.css` does for "wider" pages.
+      // Since we are not reloading once the page becomes small, we need to force the height to 100%
+      // This is a new situation introduced when `_options.resize_reload` is `false`
+      if (! _options.isMobile) {
+        // only add if `fillpage.css` was added in the first place
+        if (_options.fillPage) {
+          // fillpage.css
+          $("html,body,#dashboard").css("height", "100%");
+        }
+      }
+    }
+    // trigger layoutcomplete event
+    dashboardContainer.trigger('flexdashboard:layoutcomplete');
+  }
+
+  function resolveMobileClasses(dashboardContainer) {
+     // add top level layout class
+    dashboardContainer.addClass(isMobilePhone() ? 'mobile-layout' :
+                                                  'desktop-layout');
+
+    // look for .mobile sections and add .no-mobile to their peers
+    var mobileSections = $('.section.mobile');
+    mobileSections.each(function() {
+       var id = $(this).attr('id');
+       var nomobileId = id.replace(/-\d+$/, '');
+       $('#' + nomobileId).addClass('no-mobile');
+    });
+  }
+
+  function addNavbarItems(navbarItems) {
+
+    var navbarLeft = $('ul.navbar-left');
+    var navbarRight = $('ul.navbar-right');
+
+    for (var i = 0; i<navbarItems.length; i++) {
+
+      // get the item
+      var item = navbarItems[i];
+
+      // determine the container
+      var container = null;
+      if (item.align === "left")
+        container = navbarLeft;
+      else
+        container = navbarRight;
+
+      // navbar menu if we have multiple items
+      if (item.items) {
+        var menu = navbarMenu(null, item.icon, item.title, container);
+        for (var j = 0; j<item.items.length; j++) {
+          var subItem = item.items[j];
+          var li = $('<li></li>');
+          li.append(navbarLink(subItem.icon, subItem.title, subItem.href, subItem.target));
+          menu.append(li);
+        }
+      } else {
+        var li = $('<li></li>');
+        li.append(navbarLink(item.icon, item.title, item.href, item.target));
+        container.append(li);
+      }
+    }
+  }
+
+  // create or get a reference to an existing dropdown menu
+  function navbarMenu(id, icon, title, container) {
+    var existingMenu = [];
+    if (id)
+      existingMenu = container.children('#' + id);
+    if (existingMenu.length > 0) {
+      return existingMenu.children('ul');
+    } else {
+      var li = $('<li></li>');
+      if (id)
+        li.attr('id', id);
+      li.addClass('dropdown');
+      // auto add "Share" title on mobile if necessary
+      if (!title && icon && (icon === "fa-share-alt") && isMobilePhone())
+        title = "Share";
+      if (title) {
+        title = title + ' <span class="caret"></span>';
+      }
+      var a = navbarLink(icon, title, "#");
+      a.addClass('dropdown-toggle');
+      a.attr('data-toggle', 'dropdown');
+      a.attr('role', 'button');
+      a.attr('aria-expanded', 'false');
+      li.append(a);
+      var ul = $('<ul class="dropdown-menu"></ul>');
+      ul.attr('role', 'menu');
+      li.append(ul);
+      container.append(li);
+      return ul;
+    }
+  }
+
+  function addToNavbar(page, active) {
+
+    // capture the id and data-icon attribute (if any)
+    var id = page.attr('id');
+    var icon = page.attr('data-icon');
+    var navmenu = page.attr('data-navmenu');
+
+    // get hidden state (transfer this to navbar)
+    var hidden = page.hasClass('hidden');
+    page.removeClass('hidden');
+
+    // sanitize the id for use with bootstrap tabs
+    id = id.replace(/[.\/?&!#<>]/g, '').replace(/\s/g, '_');
+    page.attr('id', id);
+
+    // get the wrapper
+    var wrapper = page.closest('.dashboard-page-wrapper');
+
+    // move the id to the wrapper
+    page.removeAttr('id');
+    wrapper.attr('id', id);
+
+    // add the tab-pane class to the wrapper
+    wrapper.addClass('tab-pane');
+    if (active)
+      wrapper.addClass('active');
+
+    // get a reference to the h1, discover its inner contens, then detach it
+    var h1 = wrapper.find('h1').first();
+    var title = h1.contents();
+    h1.detach();
+
+    // create a navbar item
+    var li = $('<li></li>');
+    var a = navbarLink(icon, title, '#' + id);
+    a.attr('data-toggle', 'tab');
+    li.append(a);
+
+    // add it to the navbar (or navbar menu if specified)
+    var container = $('ul.navbar-left');
+    if (navmenu) {
+      var menuId = navmenu.replace(/\s+/g, '');
+      var menu = navbarMenu(menuId, null, navmenu, container);
+      menu.append(li);
+    } else {
+      container.append(li);
+    }
+
+    // hide it if requested
+    if (hidden)
+      li.addClass('hidden');
+  }
+
+  function navbarLink(icon, title, href, target) {
+
+    var a = $('<a></a>');
+    if (icon) {
+
+      // get the name of the icon set and icon
+      var dashPos = icon.indexOf("-");
+      var iconSet = null;
+      var iconSplit = icon.split(" ");
+      if (iconSplit.length > 1) {
+        iconSet = iconSplit[0];
+        icon = iconSplit.slice(1).join(" ");
+      } else {
+        iconSet = icon.substring(0, dashPos);
+      }
+      var iconName = icon.substring(dashPos + 1);
+
+      // create the icon
+      var iconElement = $('<span class="' + iconSet + ' ' + icon + '"></span>');
+      if (title)
+        iconElement.css('margin-right', '7px');
+      a.append(iconElement);
+      // if href is null see if we can auto-generate based on icon (e.g. social)
+      if (!href)
+        maybeGenerateLinkFromIcon(iconName, a);
+    }
+    if (title)
+      a.append(title);
+
+    // add the href.
+    if (href) {
+      if (href === "source_embed") {
+        a.attr('href', '#');
+        a.attr('data-featherlight', "#flexdashboard-source-code");
+        a.featherlight({
+            beforeOpen: function(event){
+              $('body').addClass('unselectable');
+            },
+            afterClose: function(event){
+              $('body').removeClass('unselectable');
+            }
+        });
+      } else {
+        a.attr('href', href);
+      }
+    }
+
+    // add the arget
+    if (target)
+      a.attr('target', target);
+
+    return a;
+  }
+
+  // auto generate a link from an icon name (e.g. twitter) when possible
+  function maybeGenerateLinkFromIcon(iconName, a) {
+
+     var serviceLinks = {
+      "twitter": "https://twitter.com/share?text=" + encodeURIComponent(document.title) + "&url="+encodeURIComponent(location.href),
+      "facebook": "https://www.facebook.com/sharer/sharer.php?s=100&p[url]="+encodeURIComponent(location.href),
+      "google-plus": "https://plus.google.com/share?url="+encodeURIComponent(location.href),
+      "linkedin": "https://www.linkedin.com/shareArticle?mini=true&url="+encodeURIComponent(location.href) + "&title=" + encodeURIComponent(document.title),
+      "pinterest": "https://pinterest.com/pin/create/link/?url="+encodeURIComponent(location.href) + "&description=" + encodeURIComponent(document.title)
+    };
+
+    var makeSocialLink = function(a, href) {
+      a.attr('href', '#');
+      a.on('click', function(e) {
+        e.preventDefault();
+        window.open(href);
+      });
+    };
+
+    $.each(serviceLinks, function(key, value) {
+      if (iconName.indexOf(key) !== -1)
+        makeSocialLink(a, value);
+    });
+  }
+
+  // layout a dashboard page
+  function layoutDashboardPage(page) {
+
+    // use a page wrapper so that free form content above the
+    // dashboard appears at the top rather than the side (as it
+    // would without the wrapper in a column orientation)
+    var wrapper = $('<div class="dashboard-page-wrapper"></div>');
+    page.wrap(wrapper);
+
+    // if there are no level2 or level3 headers synthesize a level3
+    // header to contain the (e.g. frame it, scroll container, etc.)
+    var headers = page.find('h2,h3');
+    if (headers.length === 0)
+      page.wrapInner('<div class="section level3"></div>');
+
+    // hoist up any content before level 2 or level 3 headers
+    var children = page.children();
+    children.each(function(index) {
+      if ($(this).hasClass('level2') || $(this).hasClass('level3'))
+        return false;
+      $(this).insertBefore(page);
+    });
+
+    // determine orientation and fillPage behavior for distinct media
+    var orientation, fillPage, storyboard;
+
+    // media: mobile phone
+    if (isMobilePhone()) {
+
+      // if there is a sidebar we need to ensure it's content
+      // is properly framed as an h3
+      var sidebar = page.find('.section.sidebar');
+      sidebar.removeClass('sidebar');
+      sidebar.wrapInner('<div class="section level3"></div>');
+      var h2 = sidebar.find('h2');
+      var h3 = $('<h3></h3>');
+      h3.append(h2.contents());
+      h3.insertBefore(h2);
+      h2.detach();
+
+      // wipeout h2 elements then enclose them in a single h2
+      var level2 = page.find('div.section.level2');
+      level2.each(function() {
+        level2.children('h2').remove();
+        level2.children().unwrap();
+      });
+      page.wrapInner('<div class="section level2"></div>');
+
+      // substitute mobile images
+      if (isPortrait()) {
+        var mobileFigures = $('img.mobile-figure');
+        mobileFigures.each(function() {
+          // get the src (might be base64 encoded)
+          var src = $(this).attr('src');
+
+          // find it's peer
+          var id = $(this).attr('data-mobile-figure-id');
+          var img = $('img[data-figure-id=' + id + "]");
+          img.attr('src', src)
+             .attr('width', _options.defaultFigWidthMobile)
+             .attr('height', _options.defaultFigHeightMobile);
+        });
+      }
+
+      // hoist storyboard commentary into it's own section
+      if (page.hasClass('storyboard')) {
+        var commentaryHR = page.find('div.section.level3 hr');
+        commentaryHR.each(function() {
+          var commentary = $(this).nextAll().detach();
+          var commentarySection = $('<div class="section level3"></div>');
+          commentarySection.append(commentary);
+          commentarySection.insertAfter($(this).closest('div.section.level3'));
+          $(this).remove();
+        });
+      }
+
+      // force a non full screen layout by columns
+      orientation = _options.orientation = 'columns';
+      fillPage = _options.fillPage = false;
+      storyboard = _options.storyboard = false;
+
+    // media: desktop
+    } else {
+
+      // determine orientation
+      orientation = page.attr('data-orientation');
+      if (orientation !== 'rows' && orientation != 'columns')
+        orientation = _options.orientation;
+
+      // determine storyboard mode
+      storyboard = page.hasClass('storyboard');
+
+      // fillPage based on options (force for storyboard)
+      fillPage = _options.fillPage || storyboard;
+
+      // handle sidebar
+      var sidebar = page.find('.section.level2.sidebar');
+      if (sidebar.length > 0)
+        layoutSidebar(sidebar, page);
+    }
+
+    // give it and it's parent divs height: 100% if we are in fillPage mode
+    if (fillPage) {
+      page.addClass('vertical-layout-fill');
+      page.css('height', '100%');
+      page.parents('div').css('height', '100%');
+    } else {
+      page.addClass('vertical-layout-scroll');
+    }
+
+    // perform the layout
+    if (storyboard)
+      layoutPageAsStoryboard(page);
+    else if (orientation === 'rows')
+      layoutPageByRows(page, fillPage);
+    else if (orientation === 'columns')
+      layoutPageByColumns(page, fillPage);
+  }
+
+  function layoutSidebar(sidebar, content) {
+
+    // get it out of the header hierarchy
+    sidebar = sidebar.first();
+    if (sidebar.hasClass('level1')) {
+      sidebar.removeClass('level1');
+      sidebar.children('h1').remove();
+    } else if (sidebar.hasClass('level2')) {
+      sidebar.removeClass('level2');
+      sidebar.children('h2').remove();
+    }
+
+    // determine width
+    var sidebarWidth = isTablet() ? 220 : 250;
+    var dataWidth = parseInt(sidebar.attr('data-width'));
+    if (dataWidth)
+      sidebarWidth = dataWidth;
+
+    // set the width and shift the page right to accomodate the sidebar
+    sidebar.css('width', sidebarWidth + 'px');
+    content.css('padding-left', sidebarWidth + 'px');
+
+    // wrap it's contents in a form
+    sidebar.wrapInner($('<form></form>'));
+  }
+
+  function layoutPageAsStoryboard(page) {
+
+    // create storyboard navigation
+    var nav = $('<div class="storyboard-nav"></div>');
+
+    // add navigation buttons
+    var prev = $('<button class="sbprev"><i class="fa fa-angle-left"></i></button>');
+    nav.append(prev);
+    var next= $('<button class="sbnext"><i class="fa fa-angle-right"></i></button>');
+    nav.append(next);
+
+    // add navigation frame
+    var frameList = $('<div class="sbframelist"></div>');
+    nav.append(frameList);
+    var ul = $('<ul></ul>');
+    frameList.append(ul);
+
+     // find all the level3 sections (those are the storyboard frames)
+    var frames = page.find('div.section.level3');
+    frames.each(function() {
+
+      // mark it
+      $(this).addClass('sbframe');
+
+      // divide it into chart content and (optional) commentary
+      $(this).addClass('dashboard-column-orientation');
+
+      // stuff the chart into it's own div w/ flex
+      $(this).wrapInner('<div class="sbframe-component"></div>');
+      setFlex($(this), 1);
+      var frame = $(this).children('.sbframe-component');
+
+      // extract the title from the h3
+      var li = $('<li></li>');
+      var h3 = frame.children('h3');
+      li.append(h3.contents());
+      h3.detach();
+      ul.append(li);
+
+      // extract commentary
+      var hr = frame.children('hr');
+      if (hr.length) {
+        var commentary = hr.nextAll().detach();
+        hr.remove();
+        var commentaryFrame = $('<div class="sbframe-commentary"></div>');
+        commentaryFrame.addClass('flowing-content-shim');
+        commentaryFrame.addClass('flowing-content-container');
+        commentaryFrame.append(commentary);
+        $(this).append(commentaryFrame);
+
+        // look for a data-commentary-width attribute
+        var commentaryWidth = $(this).attr('data-commentary-width');
+        if (commentaryWidth)
+          commentaryFrame.css('width', commentaryWidth + 'px');
+      }
+
+      // layout the chart (force flex)
+      var result = layoutChart(frame, true);
+
+      // ice the notes if there are none
+      if (!result.notes)
+        frame.find('.chart-notes').remove();
+
+      // set flex on chart
+      setFlex(frame, 1);
+    });
+
+    // create a div to hold all the frames
+    var frameContent = $('<div class="sbframe-content"></div>');
+    frameContent.addClass('dashboard-row-orientation');
+    frameContent.append(frames.detach());
+
+    // row orientation to stack nav and frame content
+    page.addClass('dashboard-row-orientation');
+    page.append(nav);
+    page.append(frameContent);
+    setFlex(frameContent, 1);
+
+    // initialize sly
+    var sly = new Sly(frameList, {
+    		horizontal: true,
+    		itemNav: 'basic',
+    		smart: true,
+    		activateOn: 'click',
+    		startAt: 0,
+    		scrollBy: 1,
+    		activatePageOn: 'click',
+    		speed: 200,
+    		moveBy: 600,
+    		dragHandle: true,
+    		dynamicHandle: true,
+    		clickBar: true,
+    		keyboardNavBy: 'items',
+    		next: next,
+    		prev: prev
+    	}).init();
+
+    // make first frame active
+    frames.removeClass('active');
+    frames.first().addClass('active');
+
+    // subscribe to frame changed events
+    sly.on('active', function (eventName, itemIndex) {
+      frames.removeClass('active');
+      frames.eq(itemIndex).addClass('active')
+                          .trigger('shown');
+    });
+  }
+
+  function layoutPageByRows(page, fillPage) {
+
+    // row orientation
+    page.addClass('dashboard-row-orientation');
+
+    // find all the level2 sections (those are the rows)
+    var rows = page.find('div.section.level2');
+
+    // if there are no level2 sections then treat the
+    // entire page as if it's a level 2 section
+    if (rows.length === 0) {
+      page.wrapInner('<div class="section level2"></div>');
+      rows = page.find('div.section.level2');
+    }
+
+    rows.each(function () {
+
+      // flags
+      var haveNotes = false;
+      var haveFlexHeight = true;
+
+      // remove the h2
+      $(this).children('h2').remove();
+
+      // check for a tabset
+      var isTabset = $(this).hasClass('tabset');
+      if (isTabset)
+        layoutTabset($(this));
+
+      // give it row layout semantics if it's not a tabset
+      if (!isTabset)
+        $(this).addClass('dashboard-row');
+
+      // find all of the level 3 subheads
+      var columns = $(this).find('div.section.level3');
+
+      // determine figureSizes sizes
+      var figureSizes = chartFigureSizes(columns);
+
+      // fixup the columns
+      columns.each(function(index) {
+
+        // layout the chart (force flex if we are in a tabset)
+        var result = layoutChart($(this), isTabset);
+
+        // update flexHeight state
+        if (!result.flex)
+          haveFlexHeight = false;
+
+        // update state
+        if (result.notes)
+          haveNotes = true;
+
+        // set the column flex based on the figure width
+        // (value boxes will just get the default figure width)
+        var chartWidth = figureSizes[index].width;
+        setFlex($(this), chartWidth + ' ' + chartWidth + ' 0px');
+
+      });
+
+      // remove empty chart note divs
+      if (isTabset)
+        $(this).find('.chart-notes').filter(function() {
+            return $(this).html() === "&nbsp;";
+        }).remove();
+      if (!haveNotes)
+        $(this).find('.chart-notes').remove();
+
+       // make it a flexbox row
+      if (haveFlexHeight)
+        $(this).addClass('dashboard-row-flex');
+
+      // now we can set the height on all the wrappers (based on maximum
+      // figure height + room for title and notes, or data-height on the
+      // container if specified). However, don't do this if there is
+      // no flex on any of the constituent columns
+      var flexHeight = null;
+      var dataHeight = parseInt($(this).attr('data-height'));
+      if (dataHeight)
+        flexHeight = adjustedHeight(dataHeight, columns.first());
+      else if (haveFlexHeight)
+        flexHeight = maxChartHeight(figureSizes, columns);
+      if (flexHeight) {
+        if (fillPage)
+          setFlex($(this), flexHeight + ' ' + flexHeight + ' 0px');
+        else {
+          $(this).css('height', flexHeight + 'px');
+          setFlex($(this), '0 0 ' + flexHeight + 'px');
+        }
+      }
+
+    });
+  }
+
+  function layoutPageByColumns(page, fillPage) {
+
+    // column orientation
+    page.addClass('dashboard-column-orientation');
+
+    // find all the level2 sections (those are the columns)
+    var columns = page.find('div.section.level2');
+
+    // if there are no level2 sections then treat the
+    // entire page as if it's a level 2 section
+    if (columns.length === 0) {
+      page.wrapInner('<div class="section level2"></div>');
+      columns = page.find('div.section.level2');
+    }
+
+    // layout each column
+    columns.each(function (index) {
+
+      // remove the h2
+      $(this).children('h2').remove();
+
+      // make it a flexbox column
+      $(this).addClass('dashboard-column');
+
+      // check for a tabset
+      var isTabset = $(this).hasClass('tabset');
+      if (isTabset)
+        layoutTabset($(this));
+
+      // find all the h3 elements
+      var rows = $(this).find('div.section.level3');
+
+      // get the figure sizes for the rows
+      var figureSizes = chartFigureSizes(rows);
+
+      // column flex is the max row width (or data-width if specified)
+      var flexWidth;
+      var dataWidth = parseInt($(this).attr('data-width'));
+      if (dataWidth)
+        flexWidth = dataWidth;
+      else
+        flexWidth = maxChartWidth(figureSizes);
+      setFlex($(this), flexWidth + ' ' + flexWidth + ' 0px');
+
+      // layout each chart
+      rows.each(function(index) {
+
+        // perform the layout
+        var result = layoutChart($(this), false);
+
+        // ice the notes if there are none
+        if (!result.notes)
+          $(this).find('.chart-notes').remove();
+
+        // set flex height based on figHeight, then adjust
+        if (result.flex) {
+          var chartHeight = figureSizes[index].height;
+          chartHeight = adjustedHeight(chartHeight, $(this));
+          if (fillPage)
+            setFlex($(this), chartHeight + ' ' + chartHeight + ' 0px');
+          else {
+            $(this).css('height', chartHeight + 'px');
+            setFlex($(this), chartHeight + ' ' + chartHeight + ' ' + chartHeight + 'px');
+          }
+        }
+      });
+    });
+  }
+
+  function chartFigureSizes(charts) {
+
+    // sizes
+    var figureSizes = new Array(charts.length);
+
+    // check each chart
+    charts.each(function(index) {
+
+      // start with default
+      figureSizes[index] = {
+        width: _options.defaultFigWidth,
+        height: _options.defaultFigHeight
+      };
+
+      // look for data-height or data-width then knit options
+      var dataWidth = parseInt($(this).attr('data-width'));
+      var dataHeight = parseInt($(this).attr('data-height'));
+      var knitrOptions = $(this).find('.knitr-options:first');
+      var knitrWidth, knitrHeight;
+      if (knitrOptions) {
+        knitrWidth = parseInt(knitrOptions.attr('data-fig-width'));
+        knitrHeight =  parseInt(knitrOptions.attr('data-fig-height'));
+      }
+
+      // width
+      if (dataWidth)
+        figureSizes[index].width = dataWidth;
+      else if (knitrWidth)
+        figureSizes[index].width = knitrWidth;
+
+      // height
+      if (dataHeight)
+        figureSizes[index].height = dataHeight;
+      else if (knitrHeight)
+        figureSizes[index].height = knitrHeight;
+    });
+
+    // return sizes
+    return figureSizes;
+  }
+
+  function maxChartHeight(figureSizes, charts) {
+
+    // first compute the maximum height
+    var maxHeight = _options.defaultFigHeight;
+    for (var i = 0; i<figureSizes.length; i++)
+      if (figureSizes[i].height > maxHeight)
+        maxHeight = figureSizes[i].height;
+
+    // now add offests for chart title and chart notes
+    if (charts.length)
+      maxHeight = adjustedHeight(maxHeight, charts.first());
+
+    return maxHeight;
+  }
+
+  function adjustedHeight(height, chart) {
+    if (chart.length > 0) {
+      var chartTitle = chart.find('.chart-title');
+      if (chartTitle.length)
+        height += chartTitle.first().outerHeight();
+      var chartNotes = chart.find('.chart-notes');
+      if (chartNotes.length)
+        height += chartNotes.first().outerHeight();
+    }
+    return height;
+  }
+
+  function maxChartWidth(figureSizes) {
+    var maxWidth = _options.defaultFigWidth;
+    for (var i = 0; i<figureSizes.length; i++)
+      if (figureSizes[i].width > maxWidth)
+        maxWidth = figureSizes[i].width;
+    return maxWidth;
+  }
+
+  // layout a chart
+  function layoutChart(chart, forceFlex) {
+
+    // state to return
+    var result = {
+      notes: false,
+      flex: false
+    };
+
+    // extract the title
+    var title = extractTitle(chart);
+
+    // find components that apply to this container
+    var components = componentsFind(chart);
+
+    // if it's a custom component then call it and return
+    var customComponents = componentsCustom(components);
+    if (customComponents.length) {
+      componentsLayout(customComponents, title, chart);
+      result.notes = false;
+      result.flex = forceFlex || componentsFlex(customComponents);
+      return result;
+    }
+
+    // put all the content in a chart wrapper div
+    chart.addClass('chart-wrapper');
+    chart.wrapInner('<div class="chart-stage"></div>');
+    var chartContent = chart.children('.chart-stage');
+
+    // flex the content if appropriate
+    result.flex = forceFlex || componentsFlex(components);
+    if (result.flex) {
+      // add flex classes
+      chart.addClass('chart-wrapper-flex');
+      chartContent.addClass('chart-stage-flex');
+
+      // additional shim to break out of flexbox sizing
+      chartContent.wrapInner('<div class="chart-shim"></div>');
+      chartContent = chartContent.children('.chart-shim');
+    }
+
+    // set custom data-padding attribute
+    var pad = chart.attr('data-padding');
+    if (pad) {
+      if (pad === "0")
+        chart.addClass('no-padding');
+      else {
+        pad = pad + 'px';
+        chartContent.css('left', pad)
+                    .css('top', pad)
+                    .css('right', pad)
+                    .css('bottom', pad)
+      }
+    }
+
+    // call compoents
+    componentsLayout(components, title, chartContent);
+
+    // also activate components on shiny output
+    findShinyOutput(chartContent).on('shiny:value',
+      function(event) {
+        var element = $(event.target);
+        setTimeout(function() {
+
+          // see if we opted out of flex based on our output (for shiny
+          // we can't tell what type of output we have until after the
+          // value is bound)
+          var components = componentsFind(element);
+          var flex = forceFlex || componentsFlex(components);
+          if (!flex) {
+            chart.css('height', "");
+            setFlex(chart, "");
+            chart.removeClass('chart-wrapper-flex');
+            chartContent.removeClass('chart-stage-flex');
+            chartContent.children().unwrap();
+          }
+
+          // perform layout
+          componentsLayout(components, title, element.parent());
+        }, 10);
+      });
+
+    // add the title
+    var chartTitle = $('<div class="chart-title"></div>');
+    chartTitle.append(title);
+    chart.prepend(chartTitle);
+
+    // add the notes section
+    var chartNotes = $('<div class="chart-notes"></div>');
+    chartNotes.html('&nbsp;');
+    chart.append(chartNotes);
+
+    // attempt to extract notes if we have a component
+    if (components.length)
+      result.notes = extractChartNotes(chartContent, chartNotes);
+
+    // return result
+    return result;
+  }
+
+  // build a tabset from a section div with the .tabset class
+  function layoutTabset(tabset) {
+
+    // check for fade option
+    var fade = tabset.hasClass("tabset-fade");
+    var navClass = "nav-tabs";
+
+    // determine the heading level of the tabset and tabs
+    var match = tabset.attr('class').match(/level(\d) /);
+    if (match === null)
+      return;
+    var tabsetLevel = Number(match[1]);
+    var tabLevel = tabsetLevel + 1;
+
+    // find all subheadings immediately below
+    var tabs = tabset.find("div.section.level" + tabLevel);
+    if (!tabs.length)
+      return;
+
+    // create tablist and tab-content elements
+    var tabList = $('<ul class="nav ' + navClass + '" role="tablist"></ul>');
+    $(tabs[0]).before(tabList);
+    var tabContent = $('<div class="tab-content"></div>');
+    $(tabs[0]).before(tabContent);
+
+    // build the tabset
+    tabs.each(function(i) {
+
+      // get the tab div
+      var tab = $(tabs[i]);
+
+      // get the id then sanitize it for use with bootstrap tabs
+      var id = tab.attr('id');
+
+      // sanitize the id for use with bootstrap tabs
+      id = id.replace(/[.\/?&!#<>]/g, '').replace(/\s/g, '_');
+      tab.attr('id', id);
+
+      // get the heading element within it and grab it's text
+      var heading = tab.find('h' + tabLevel + ':first');
+      var headingDom = heading.contents();
+
+      // build and append the tab list item
+      var a = $('<a role="tab" data-toggle="tab"></a>');
+      a.append(headingDom);
+      a.attr('href', '#' + id);
+      a.attr('aria-controls', id);
+      var li = $('<li role="presentation"></li>');
+      li.append(a);
+      if (i === 0)
+        li.attr('class', 'active');
+      tabList.append(li);
+
+      // set it's attributes
+      tab.attr('role', 'tabpanel');
+      tab.addClass('tab-pane');
+      tab.addClass('tabbed-pane');
+      tab.addClass('no-title');
+      if (fade)
+        tab.addClass('fade');
+      if (i === 0) {
+        tab.addClass('active');
+        if (fade)
+          tab.addClass('in');
+      }
+
+      // move it into the tab content div
+      tab.detach().appendTo(tabContent);
+    });
+
+    // add nav-tabs-custom
+    tabset.addClass('nav-tabs-custom');
+
+    // internal layout is dashboard-column with tab-content flexing
+    tabset.addClass('dashboard-column');
+    setFlex(tabContent, 1);
+  }
+
+  // one time global initialization for components
+  function componentsInit(dashboardContainer) {
+    for (var i=0; i<window.FlexDashboardComponents.length; i++) {
+      var component = window.FlexDashboardComponents[i];
+      if (component.init)
+        component.init(dashboardContainer);
+    }
+  }
+
+  // find components that apply within a container
+  function componentsFind(container) {
+
+    // look for components
+    var components = [];
+    for (var i=0; i<window.FlexDashboardComponents.length; i++) {
+      var component = window.FlexDashboardComponents[i];
+      if (component.find(container).length)
+        components.push(component);
+    }
+
+    // if there were none then use a special flowing content component
+    // that just adds a scrollbar in fillPage mode
+    if (components.length == 0) {
+      components.push({
+        find: function(container) {
+          return container;
+        },
+
+        flex: function(fillPage) {
+          return fillPage;
+        },
+
+        layout: function(title, container, element, fillPage) {
+          if (fillPage) {
+            container.addClass('flowing-content-shim');
+            container.addClass('flowing-content-container');
+          }
+        }
+      });
+    }
+
+    return components;
+  }
+
+  // if there is a custom component then pick it out
+  function componentsCustom(components) {
+    var customComponent = [];
+    for (var i=0; i<components.length; i++)
+      if (components[i].type === "custom") {
+        customComponent.push(components[i]);
+        break;
+      }
+    return customComponent;
+  }
+
+  // query all components for flex
+  function componentsFlex(components) {
+
+    // no components at all means no flex
+    if (components.length === 0)
+      return false;
+
+    // otherwise query components (assume true unless we see false)
+    var isMobile = isMobilePhone();
+    for (var i=0; i<components.length; i++)
+      if (components[i].flex && !components[i].flex(_options.fillPage))
+        return false;
+    return true;
+  }
+
+  // layout all components
+  function componentsLayout(components, title, container) {
+    var isMobile = isMobilePhone();
+    for (var i=0; i<components.length; i++) {
+      var element = components[i].find(container);
+      if (components[i].layout) {
+        // call layout (don't call other components if it returns false)
+        var result = components[i].layout(title, container, element, _options.fillPage);
+        if (result === false)
+          return;
+      }
+    }
+  }
+
+  // get a reference to the h3, discover it's inner html, and remove it
+  function extractTitle(container) {
+    var h3 = container.children('h3').first();
+    var title = '';
+    if (!container.hasClass('no-title'))
+      title = h3.contents();
+    h3.detach();
+    return title;
+  }
+
+  // extract chart notes
+  function extractChartNotes(chartContent, chartNotes) {
+    // look for a terminating blockquote or image caption
+    var blockquote = chartContent.children('blockquote:last-child');
+    var caption = chartContent.children('div.image-container')
+                              .children('p.caption');
+    if (blockquote.length) {
+      chartNotes.empty().append(blockquote.children('p:first-child').contents());
+      blockquote.remove();
+      return true;
+    } else if (caption.length) {
+      chartNotes.empty().append(caption.contents());
+      caption.remove();
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  function findShinyOutput(chartContent) {
+    return chartContent.find('.shiny-text-output, .shiny-html-output');
+  }
+
+  // safely detect rendering on a mobile phone
+  function isMobilePhone() {
+    try
+    {
+      return ! window.matchMedia("only screen and (min-width: 768px)").matches;
+    }
+    catch(e) {
+      return false;
+    }
+  }
+
+  function isFillPage() {
+    return _options.fillPage;
+  }
+
+  // detect portrait mode
+  function isPortrait() {
+    return ($(window).width() < $(window).height());
+  }
+
+  // safely detect rendering on a tablet
+  function isTablet() {
+    try
+    {
+      return window.matchMedia("only screen and (min-width: 769px) and (max-width: 992px)").matches;
+    }
+    catch(e) {
+      return false;
+    }
+  }
+
+  // test whether this is a shiny doc
+  function isShinyDoc() {
+    return (typeof(window.Shiny) !== "undefined" && !!window.Shiny.outputBindings);
+  }
+
+  // set flex using vendor specific prefixes
+  function setFlex(el, flex) {
+    el.css('-webkit-box-flex', flex)
+      .css('-webkit-flex', flex)
+      .css('-ms-flex', flex)
+      .css('flex', flex);
+  }
+
+  // support bookmarking of pages
+  function handleLocationHash() {
+
+    // restore tab/page from bookmark
+    var hash = window.decodeURIComponent(window.location.hash);
+    if (hash.length > 0)
+      $('ul.nav a[href="' + hash + '"]').tab('show');
+    FlexDashboardUtils.manageActiveNavbarMenu();
+
+    // navigate to a tab when the history changes
+    window.addEventListener("popstate", function(e) {
+      var hash = window.decodeURIComponent(window.location.hash);
+      var activeTab = $('ul.nav a[href="' + hash + '"]');
+      if (activeTab.length) {
+        activeTab.tab('show');
+      } else {
+        $('ul.nav a:first').tab('show');
+      }
+      FlexDashboardUtils.manageActiveNavbarMenu();
+    });
+
+    // add a hash to the URL when the user clicks on a tab/page
+    $('.navbar-nav a[data-toggle="tab"]').on('click', function(e) {
+      var baseUrl = FlexDashboardUtils.urlWithoutHash(window.location.href);
+      var hash = FlexDashboardUtils.urlHash($(this).attr('href'));
+      var href = baseUrl + hash;
+      FlexDashboardUtils.setLocation(href);
+    });
+
+    // handle clicks of other links that should activate pages
+    var navPages = $('ul.navbar-nav li a[data-toggle=tab]');
+    navPages.each(function() {
+      var href =  $(this).attr('href');
+      var links = $('a[href="' + href + '"][data-toggle!=tab]');
+      links.each(function() {
+        $(this).on('click', function(e) {
+          window.FlexDashboardUtils.showPage(href);
+        });
+      });
+    });
+  }
+
+  // tweak Prism highlighting
+  function initPrismHighlighting() {
+
+    if (window.Prism) {
+      Prism.languages.insertBefore('r', 'comment', {
+        'heading': [
+          {
+            // title 1
+        	  // =======
+
+        	  // title 2
+        	  // -------
+        	  pattern: /\w+.*(?:\r?\n|\r)(?:====+|----+)/,
+            alias: 'operator'
+          },
+          {
+            // ### title 3
+            pattern: /(^\s*)###[^#].+/m,
+            lookbehind: true,
+            alias: 'operator'
+          }
+        ]
+      });
+
+      // prism highlight
+      Prism.highlightAll();
+    }
+  }
+
+
+  // get theme color
+  var themeColors = {
+    bootstrap: {
+      primary: "rgba(51, 122, 183, 0.4)",
+      info: "rgb(217, 237, 247)",
+      success: "rgb(223, 240, 216)",
+      warning: "rgb(252, 248, 227)",
+      danger: "rgb(242, 222, 222)"
+    },
+    cerulean: {
+      primary: "rgb(47, 164, 231)",
+      info: "rgb(217, 237, 247)",
+      success: "rgb(223, 240, 216)",
+      warning: "rgb(252, 248, 227)",
+      danger: "rgb(242, 222, 222)"
+    },
+    journal: {
+      primary: "rgba(235, 104, 100, 0.70)",
+      info: "rgb(217, 237, 247)",
+      success: "rgb(223, 240, 216)",
+      warning: "rgb(252, 248, 227)",
+      danger: "rgb(242, 222, 222)"
+    },
+    flatly: {
+      primary: "rgba(44, 62, 80, 0.70)",
+      info: "rgba(52, 152, 219, 0.70)",
+      success: "rgba(24, 188, 156, 0.70)",
+      warning: "rgba(243, 156, 18, 0.70)",
+      danger: "rgba(231, 76, 60, 0.70)"
+    },
+    readable: {
+      primary: "rgba(69, 130, 236, 0.4)",
+      info: "rgb(217, 237, 247)",
+      success: "rgb(223, 240, 216)",
+      warning: "rgb(252, 248, 227)",
+      danger: "rgb(242, 222, 222)"
+    },
+    spacelab: {
+      primary: "rgba(68, 110, 155, 0.25)",
+      info: "rgb(217, 237, 247)",
+      success: "rgb(223, 240, 216)",
+      warning: "rgb(252, 248, 227)",
+      danger: "rgb(242, 222, 222)"
+    },
+    united: {
+      primary: "rgba(221, 72, 20, 0.30)",
+      info: "rgb(217, 237, 247)",
+      success: "rgb(223, 240, 216)",
+      warning: "rgb(252, 248, 227)",
+      danger: "rgb(242, 222, 222)"
+    },
+    cosmo: {
+      primary: "rgba(39, 128, 227, 0.7)",
+      info: "rgba(153, 84, 187, 0.7)",
+      success: "rgba(63, 182, 24, 0.7)",
+      warning: "rgba(255, 117, 24, 0.7)",
+      danger: "rgba(255, 0, 57, 0.7)"
+    },
+    lumen: {
+      primary: "rgba(21, 140, 186, 0.70)",
+      info: "rgba(117, 202, 235, 0.90)",
+      success: "rgba(40, 182, 44, 0.70)",
+      warning: "rgba(255, 133, 27, 0.70)",
+      danger: "rgba(255, 65, 54, 0.70)"
+    },
+    paper: {
+      primary: "rgba(33, 150, 243, 0.35)",
+      info: "rgb(225, 190, 231)",
+      success: "rgb(223, 240, 216)",
+      warning: "rgb(255, 224, 178)",
+      danger: "rgb(249, 189, 187)"
+    },
+    sandstone: {
+      primary: "rgba(50, 93, 136, 0.3)",
+      info: "rgb(217, 237, 247)",
+      success: "rgb(223, 240, 216)",
+      warning: "rgb(252, 248, 227)",
+      danger: "rgb(242, 222, 222)"
+    },
+    simplex: {
+      primary: "rgba(217, 35, 15, 0.25)",
+      info: "rgb(217, 237, 247)",
+      success: "rgb(223, 240, 216)",
+      warning: "rgb(252, 248, 227)",
+      danger: "rgb(242, 222, 222)"
+    },
+    yeti: {
+      primary: "rgba(0, 140, 186, 0.298039)",
+      info: "rgb(217, 237, 247)",
+      success: "rgb(223, 240, 216)",
+      warning: "rgb(252, 248, 227)",
+      danger: "rgb(242, 222, 222)"
+    }
+  }
+  function themeColor(color) {
+    return themeColors[_options.theme][color];
+  }
+
+  FlexDashboard.prototype = {
+    constructor: FlexDashboard,
+    init: init,
+    isMobilePhone: isMobilePhone,
+    isFillPage: isFillPage,
+    themeColor: themeColor
+  };
+
+  return FlexDashboard;
+
+})();
+
+// utils
+window.FlexDashboardUtils = {
+  resizableImage: function(img) {
+    var src = img.attr('src');
+    var url = 'url("' + src + '")';
+    img.parent().css('background', url)
+                .css('background-size', 'contain')
+                .css('background-repeat', 'no-repeat')
+                .css('background-position', 'center')
+                .addClass('image-container');
+  },
+  setLocation: function(href) {
+    if (history && history.pushState) {
+      history.pushState(null, null, href);
+    } else {
+      window.location.replace(href);
+    }
+    setTimeout(function() {
+        window.scrollTo(0, 0);
+    }, 10);
+    this.manageActiveNavbarMenu();
+  },
+  showPage: function(href) {
+    $('ul.navbar-nav li a[href="' + href + '"]').tab('show');
+    var baseUrl = this.urlWithoutHash(window.location.href);
+    var loc = baseUrl + href;
+    this.setLocation(loc);
+  },
+  showLinkedValue: function(href) {
+    // check for a page link
+    if ($('ul.navbar-nav li a[data-toggle=tab][href="' + href + '"]').length > 0)
+      this.showPage(href);
+    else
+      window.open(href);
+  },
+  urlWithoutHash: function(url) {
+    var hashLoc = url.indexOf('#');
+    if (hashLoc != -1)
+      return url.substring(0, hashLoc);
+    else
+      return url;
+  },
+  urlHash: function(url) {
+    var hashLoc = url.indexOf('#');
+    if (hashLoc != -1)
+      return url.substring(hashLoc);
+    else
+      return "";
+  },
+  manageActiveNavbarMenu: function () {
+    // remove active from anyone currently active
+    $('.navbar ul.nav').find('li').removeClass('active');
+    // find the active tab
+    var activeTab = $('.dashboard-page-wrapper.tab-pane.active');
+    if (activeTab.length > 0) {
+      var tabId = activeTab.attr('id');
+      if (tabId)
+        $(".navbar ul.nav a[href='#" + tabId + "']").parents('li').addClass('active');
+    }
+  }
+};
+
+window.FlexDashboard = new FlexDashboard();
+
+// empty content
+window.FlexDashboardComponents.push({
+  find: function(container) {
+    if (container.find('p').length == 0)
+      return container;
+    else
+      return $();
+  }
+})
+
+// plot image
+window.FlexDashboardComponents.push({
+
+  find: function(container) {
+    return container.children('p')
+                    .children('img:only-child');
+  },
+
+  layout: function(title, container, element, fillPage) {
+    FlexDashboardUtils.resizableImage(element);
+  }
+});
+
+// plot image (figure style)
+window.FlexDashboardComponents.push({
+
+  find: function(container) {
+    return container.children('div.figure').children('img');
+  },
+
+  layout: function(title, container, element, fillPage) {
+    FlexDashboardUtils.resizableImage(element);
+  }
+});
+
+// htmlwidget
+window.FlexDashboardComponents.push({
+
+  init: function(dashboardContainer) {
+    // trigger "shown" after initial layout to force static htmlwidgets
+    // in runtime: shiny to be resized after the dom has been transformed
+    dashboardContainer.on('flexdashboard:layoutcomplete', function(event) {
+      setTimeout(function() {
+        dashboardContainer.trigger('shown');
+      }, 200);
+    });
+  },
+
+  find: function(container) {
+    return container.children('div[id^="htmlwidget-"],div.html-widget');
+  }
+});
+
+// gauge
+window.FlexDashboardComponents.push({
+
+  find: function(container) {
+    return container.children('div.html-widget.gauge');
+  },
+
+  flex: function(fillPage) {
+    return false;
+  },
+
+  layout: function(title, container, element, fillPage) {
+
+
+  }
+
+});
+
+// shiny output
+window.FlexDashboardComponents.push({
+  find: function(container) {
+    return container.children('div[class^="shiny-"]');
+  }
+});
+
+// datatables
+window.FlexDashboardComponents.push({
+  find: function(container) {
+    return container.find('.datatables');
+  },
+  flex: function(fillPage) {
+    return fillPage;
+  }
+});
+
+// bootstrap table
+window.FlexDashboardComponents.push({
+
+  find: function(container) {
+    var bsTable = container.find('table.table');
+    if (bsTable.length !== 0)
+      return bsTable;
+    else
+      return container.find('tr.header').parent('thead').parent('table');
+  },
+
+  flex: function(fillPage) {
+    return fillPage;
+  },
+
+  layout: function(title, container, element, fillPage) {
+
+    // alias variables
+    var bsTable = element;
+
+    // fixup xtable generated tables with a proper thead
+    var headerRow = bsTable.find('tbody > tr:first-child > th').parent();
+    if (headerRow.length > 0) {
+      var thead = $('<thead></thead>');
+      bsTable.prepend(thead);
+      headerRow.detach().appendTo(thead);
+    }
+
+    // improve appearance
+    container.addClass('bootstrap-table');
+
+    // for fill page provide scrolling w/ sticky headers
+    if (fillPage) {
+      // force scrollbar on overflow
+      container.addClass('flowing-content-shim');
+
+      // stable table headers when scrolling
+      bsTable.stickyTableHeaders({
+        scrollableArea: container
+      });
+    }
+  }
+});
+
+// embedded shiny app
+window.FlexDashboardComponents.push({
+
+  find: function(container) {
+    return container.find('iframe.shiny-frame');
+  },
+
+  flex: function(fillPage) {
+    return fillPage;
+  },
+
+  layout: function(title, container, element, fillPage) {
+    if (fillPage) {
+      element.attr('height', '100%');
+    } else {
+      // provide default height if necessary
+      var height = element.get(0).style.height;
+      if (!height)
+        height = element.attr('height');
+      if (!height)
+        element.attr('height', 500);
+    }
+  }
+});
+
+// shiny fillRow or fillCol
+window.FlexDashboardComponents.push({
+
+  find: function(container) {
+    return container.find('.flexfill-container');
+  },
+
+  flex: function(fillPage) {
+    return fillPage;
+  },
+
+  layout: function(title, container, element, fillPage) {
+    if (fillPage)
+      element.css('height', '100%');
+    else {
+      // provide default height if necessary
+      var height = element.get(0).style.height;
+      if (height === "100%" || height === "auto" || height === "initial" ||
+          height === "inherit" || !height) {
+        element.css('height', 500);
+      }
+    }
+  }
+});
+
+// valueBox
+window.FlexDashboardComponents.push({
+
+  type: "custom",
+
+  find: function(container) {
+    if (container.find('span.value-output, .shiny-valuebox-output').length)
+      return container;
+    else
+      return $();
+  },
+
+  flex: function(fillPage) {
+    return false;
+  },
+
+  layout: function(title, container, element, fillPage) {
+
+    // alias variables
+    var chartTitle = title;
+    var valueBox = element;
+
+    // add value-box class to container
+    container.addClass('value-box');
+
+    // value paragraph
+    var value = $('<p class="value"></p>');
+
+    // if we have shiny-text-output then just move it in
+    var valueOutputSpan = [];
+    var shinyOutput = valueBox.find('.shiny-valuebox-output').detach();
+    if (shinyOutput.length) {
+      valueBox.children().remove();
+      shinyOutput.html("&mdash;");
+      value.append(shinyOutput);
+    } else {
+      // extract the value (remove leading vector index)
+      var chartValue = valueBox.text().trim();
+      chartValue = chartValue.replace("[1] ", "");
+      valueOutputSpan = valueBox.find('span.value-output').detach();
+      valueBox.children().remove();
+      value.text(chartValue);
+    }
+
+    // caption
+    var caption = $('<p class="caption"></p>');
+    caption.append(chartTitle);
+
+    // build inner div for value box and add it
+    var inner = $('<div class="inner"></div>');
+    inner.append(value);
+    inner.append(caption);
+    valueBox.append(inner);
+
+    // add icon if specified
+    var icon = $('<div class="icon"><i></i></div>');
+    valueBox.append(icon);
+    function setIcon(chartIcon) {
+      var iconLib = "";
+      var iconSplit = chartIcon.split(" ");
+      if (iconSplit.length > 1) {
+        iconLib = iconSplit[0];
+        chartIcon = iconSplit.slice(1).join(" ");
+      } else {
+        var components = chartIcon.split("-");
+        if (components.length > 1)
+          iconLib = components[0];
+      }
+      icon.children('i').attr('class', iconLib + ' ' + chartIcon);
+    }
+    var chartIcon = valueBox.attr('data-icon');
+    if (chartIcon)
+      setIcon(chartIcon);
+
+    // set color based on data-background if necessary
+    var dataBackground = valueBox.attr('data-background');
+    if (dataBackground)
+      valueBox.css('background-color', bgColor);
+    else {
+      // default to bg-primary if no other background is specified
+      if (!valueBox.hasClass('bg-primary') &&
+          !valueBox.hasClass('bg-info') &&
+          !valueBox.hasClass('bg-warning') &&
+          !valueBox.hasClass('bg-success') &&
+          !valueBox.hasClass('bg-danger')) {
+        valueBox.addClass('bg-primary');
+      }
+    }
+
+    // handle data attributes in valueOutputSpan
+    function handleValueOutput(valueOutput) {
+
+      // caption
+      var dataCaption = valueOutput.attr('data-caption');
+      if (dataCaption)
+        caption.html(dataCaption);
+
+      // icon
+      var dataIcon = valueOutput.attr('data-icon');
+      if (dataIcon)
+        setIcon(dataIcon);
+
+      // color
+      var dataColor = valueOutput.attr('data-color');
+      if (dataColor) {
+        if (dataColor.indexOf('bg-') === 0) {
+          valueBox.css('background-color', '');
+          if (!valueBox.hasClass(dataColor)) {
+             valueBox.removeClass('bg-primary bg-info bg-warning bg-danger bg-success');
+             valueBox.addClass(dataColor);
+          }
+        } else {
+          valueBox.removeClass('bg-primary bg-info bg-warning bg-danger bg-success');
+          valueBox.css('background-color', dataColor);
+        }
+      }
+
+      // url
+      var dataHref = valueOutput.attr('data-href');
+      if (dataHref) {
+        valueBox.addClass('linked-value');
+        valueBox.off('click.value-box');
+        valueBox.on('click.value-box', function(e) {
+          window.FlexDashboardUtils.showLinkedValue(dataHref);
+        });
+      }
+    }
+
+    // check for a valueOutputSpan
+    if (valueOutputSpan.length > 0) {
+      handleValueOutput(valueOutputSpan);
+    }
+
+    // if we have a shinyOutput then bind a listener to handle
+    // new valueOutputSpan values
+    shinyOutput.on('shiny:value',
+      function(event) {
+        var element = $(event.target);
+        setTimeout(function() {
+          var valueOutputSpan = element.find('span.value-output');
+          if (valueOutputSpan.length > 0)
+            handleValueOutput(valueOutputSpan);
+        }, 10);
+      }
+    );
+  }
+});
+</script>
+
+<div id="dashboard-container">
+
+<div id="column" class="section level2" data-width="650">
+<h2 data-width="650">Column</h2>
+<div id="chart-a" class="section level3">
+<h3>Chart A</h3>
+<div class="knitr-options" data-fig-width="576" data-fig-height="460">
+
+</div>
+<div id="htmlwidget-977ad2fdb1ddfef47e39" style="width:576px;height:460.8px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-977ad2fdb1ddfef47e39">{"x":{"visdat":{"2e5459c85dad":["function () ","plotlyVisDat"]},"cur_data":"2e5459c85dad","attrs":{"2e5459c85dad":{"x":{},"y":{},"mode":"lines","name":"trace 0","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter"},"2e5459c85dad.1":{"x":{},"y":{},"mode":"lines+markers","name":"trace 1","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter","inherit":true},"2e5459c85dad.2":{"x":{},"y":{},"mode":"markers","name":"trace 2","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter","inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":"x"},"yaxis":{"domain":[0,1],"automargin":true,"title":"trace_0"},"hovermode":"closest","showlegend":true},"source":"A","config":{"showSendToCloud":false},"data":[{"x":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100],"y":[5.50075884646288,5.04437212002934,5.23376258661575,5.51674863795117,6.38699171854668,3.70904846143545,5.04603546859019,3.58014672793883,5.38892145174298,4.46232439559063,4.20362510674785,4.85551213106413,4.58201713919461,3.58887452343818,5.92216281991372,5.39020918376161,6.82289097882308,3.72515410167806,5.53697853439387,5.37431790501887,6.20260231184407,3.84120899192822,4.01338015764951,6.37506653828805,5.52719810547559,2.53025253406173,4.85140229937253,2.76612908051201,3.70297404629415,5.30951124048173,4.95039142758829,5.58818501927306,4.28976134454717,5.49399710818473,4.65731083967762,5.90657265041582,7.89807573931067,5.22427653548704,5.05020259812069,4.87460391530369,5.24106513228989,3.15807707207077,4.75558104102137,5.17593935514768,5.89737079196722,3.78576631339804,5.52078851850497,5.60822659714878,5.94037793590415,5.29332795542956,5.63264537937789,6.17748021019362,5.14824694701633,6.38195259078416,4.8401447856293,4.95852034862392,5.33090073359905,6.28543893696047,4.92708317082675,6.12646442719084,3.43158659035951,6.23035261055174,6.52839695755285,4.96367358288888,5.16132612793984,5.21093865358841,4.48475172483041,5.7600021175868,5.41259663642602,2.97886389532629,6.30573704585212,5.63922380818375,4.43823717682912,3.85599185123276,6.36966763881164,3.65043072262666,3.2639901610912,2.95553094564612,5.31875354735915,3.8143825369113,5.98046964878261,4.58351398962859,5.37202842219271,4.55764162835395,6.56006604611693,4.65371268990685,5.52189810883448,6.2159965993218,5.59294714188356,3.43940624208536,5.5729317738626,4.24834108551013,5.23355917884284,3.46770749548073,4.6461206157572,5.16027866152071,6.15021183926944,5.23428302594803,5.61975638799365,4.46617794524452],"mode":"lines","name":"trace 0","type":"scatter","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"line":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100],"y":[0.739057392191428,1.08910386469342,0.183102612792348,-1.68830420288241,0.7998683714084,0.574288159712912,-2.23115038062351,-0.141162906322441,1.52228719992722,-2.4547809725196,-1.99333641345214,1.7212231919405,0.228092534128964,-0.629756300439685,-0.00448181897831664,1.84146785627176,0.449936618937254,1.16507245779416,0.535389299073393,0.0692402725697409,0.24861734130002,-0.568794718317738,0.539092908218907,-0.582751931911973,-2.0124633837583,0.985412900788569,-0.778682741171258,0.376150214985726,-0.474533360834998,0.855805386445831,0.32526550310701,0.853026790515512,-1.63945833320316,0.774701925160337,-0.43106106088758,-0.334073183486941,1.67700550713005,1.3354165245389,0.36425446107287,-0.161410695053462,-0.161756525277323,1.8027264197152,-0.778472933754186,-1.77688014325524,-0.122280364492163,0.0368002808928212,0.122492670570634,0.150593676869114,-1.68600856731611,0.448474631786711,1.6262437881391,-0.27553145788243,0.164839501019901,0.192079777899442,-0.0831555083954231,1.47458547348266,-0.44101299121245,0.115325867437984,0.515829831491045,-0.203628508344305,0.278978817975912,-0.0964195722959157,-0.935099993148841,-1.14687592024188,-0.144904525001899,-0.190785968716256,-0.536021099230406,0.296338008960499,0.0438693110007642,-0.514066461505019,0.547639734555522,1.16634347809787,-1.061417961125,0.54117014528718,-0.0591097909384836,0.647992716230218,0.284910660629504,0.15194178199521,-0.371087899428669,0.433393298672705,-1.52619464794018,0.232465852577096,-0.197451280942162,0.545848067002666,1.10536257962825,0.251591437238331,0.604423161103947,0.27642822389365,0.123286554370377,-1.49298037425425,0.389134026452244,-0.952253986296076,0.0903187942810525,-0.415763855776057,-0.595185854367582,0.604462810384394,0.519951684061746,-0.539659982734239,-1.01147484668555,0.789035936353591],"mode":"lines+markers","name":"trace 1","type":"scatter","marker":{"color":"rgba(255,127,14,1)","line":{"color":"rgba(255,127,14,1)"}},"error_y":{"color":"rgba(255,127,14,1)"},"error_x":{"color":"rgba(255,127,14,1)"},"line":{"color":"rgba(255,127,14,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100],"y":[-5.00424638163235,-4.30222575919331,-4.33689095871603,-4.56665544277093,-5.50114124073486,-5.85718495087483,-6.45954442350522,-6.75045823873445,-6.31787345001233,-5.88492080223173,-4.04431425205345,-3.48919572020729,-5.71538104717877,-4.36242135187955,-4.21037735248081,-5.46361613122988,-4.63159622587621,-3.95851308035753,-5.08352659788538,-5.98347762476781,-3.8947265567996,-3.80801491261879,-5.26137735489314,-3.95635423945452,-4.77430760612305,-5.03530841068679,-5.54396656628333,-5.70036642500372,-5.72621726062209,-5.50729659375241,-5.64674580403885,-5.18256673210103,-6.80801065122033,-3.28763347261084,-3.42601709747509,-4.90662802598094,-4.99310374503861,-5.61510360030963,-4.0315841808154,-3.84056387800634,-6.83932759560025,-4.11741174932293,-4.87889386828188,-4.65067210431211,-3.95176317329869,-3.38276623680987,-4.91828745281038,-3.89067764701157,-5.59312701007167,-5.01333755279381,-6.91038843275445,-4.64104442871645,-3.67468404497617,-5.16501407494848,-4.65458766239063,-5.30389964494013,-5.7020006326008,-4.87138087564879,-4.99208787119892,-5.75234507473016,-4.79615220926535,-4.53619124472433,-4.86264910121136,-5.76353750258717,-5.89434361895244,-4.35105534386817,-5.50898785984089,-5.17699219589541,-5.41245735517883,-4.5007006593787,-4.47113578457735,-6.02144017525506,-4.67876101392441,-4.64643405396849,-3.91786817036575,-5.13211037467723,-4.02092305181746,-5.86102183014389,-4.68349155803994,-5.05629792048846,-6.4959206287082,-7.23209345674691,-4.74557822471294,-3.16021840971392,-3.50019215482199,-5.380486839218,-4.22498503523996,-4.28749433960925,-5.61642665402151,-5.6569848545316,-2.41163909367906,-6.25984894600105,-5.47012942786705,-4.62245762010918,-5.10393833106487,-5.22234179730169,-4.71090848717493,-5.63811697321293,-5.38718232722367,-3.97163749574138],"mode":"markers","name":"trace 2","type":"scatter","marker":{"color":"rgba(44,160,44,1)","line":{"color":"rgba(44,160,44,1)"}},"error_y":{"color":"rgba(44,160,44,1)"},"error_x":{"color":"rgba(44,160,44,1)"},"line":{"color":"rgba(44,160,44,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<div id="column-1" class="section level2" data-width="350">
+<h2 data-width="350">Column</h2>
+<div id="chart-b" class="section level3">
+<h3>Chart B</h3>
+<div class="knitr-options" data-fig-width="576" data-fig-height="460">
+
+</div>
+<div id="htmlwidget-863c9e11319b8325b039" style="width:576px;height:460.8px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-863c9e11319b8325b039">{"x":{"visdat":{"2e54dfb50d7":["function () ","plotlyVisDat"]},"cur_data":"2e54dfb50d7","attrs":{"2e54dfb50d7":{"x":{},"y":{},"mode":"markers","marker":{"symbol":"circle","sizemode":"diameter","line":{"width":2,"color":"#FFFFFF"}},"text":{},"color":{},"size":{},"colors":["#4AC6B7","#1972A4","#965F8A","#FF7070","#C61951"],"alpha_stroke":1,"sizes":[2.30670292223662,187.501378170123],"spans":[1,20],"type":"scatter"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"title":"Life Expectancy v. Per Capita GDP, 2007","xaxis":{"domain":[0,1],"automargin":true,"title":"GDP per capita (2000 dollars)","gridcolor":"rgb(255, 255, 255)","range":[2.0032976607017,5.19150553070871],"type":"log","zerolinewidth":1,"ticklen":5,"gridwidth":2},"yaxis":{"domain":[0,1],"automargin":true,"title":"Life Expectancy (years)","gridcolor":"rgb(255, 255, 255)","range":[36.1262167135217,91.7292179326433],"zerolinewidth":1,"ticklen":5,"gridwith":2},"paper_bgcolor":"rgb(243, 243, 243)","plot_bgcolor":"rgb(243, 243, 243)","hovermode":"closest","showlegend":true},"source":"A","config":{"showSendToCloud":false},"data":[{"x":[6223.367465,4797.231267,1441.284873,12569.85177,1217.032994,430.0706916,2042.09524,706.016537,1704.063724,986.1478792,277.5518587,3632.557798,1544.750112,2082.481567,5581.180998,12154.08975,641.3695236,690.8055759,13206.48452,752.7497265,1327.60891,942.6542111,579.231743,1463.249282,1569.331442,414.5073415,12057.49928,1044.770126,759.3499101,1042.581557,1803.151496,10956.99112,3820.17523,823.6856205,4811.060429,619.6768924,2013.977305,7670.122558,863.0884639,1598.435089,1712.472136,862.5407561,926.1410683,9269.657808,2602.394995,4513.480643,1107.482182,882.9699438,7092.923025,1056.380121,1271.211593,469.7092981],"y":[72.301,42.731,56.728,50.728,52.295,49.58,50.43,44.741,50.651,65.152,46.462,55.322,48.328,54.791,71.338,51.579,58.04,52.947,56.735,59.448,60.022,56.007,46.388,54.11,42.592,45.678,73.952,59.443,48.303,54.467,64.164,72.801,71.164,42.082,52.906,56.867,46.859,76.442,46.242,65.528,63.062,42.568,48.159,49.339,58.556,39.613,52.517,58.42,73.923,51.542,42.384,43.487],"mode":"markers","marker":{"color":"rgba(74,198,183,1)","size":[29.8107466028207,18.1971495671469,14.6755575444158,6.61060300435124,19.543385335458,14.956442130894,21.7207789006296,10.792626698654,16.5218594383543,4.35368324283851,41.5024010006347,10.0660920623388,21.9145319605078,3.63779948600789,46.2589864862037,3.83344505696074,11.4373104105454,45.1646554235393,6.22796109931411,6.70913673861759,24.6944307003913,16.2853866046767,6.26461228582446,30.8121008634256,7.32517940328621,9.22779116422642,12.6864975293359,22.6057398461855,18.8495822962575,17.910159625556,9.33710918558204,5.77487271428601,29.9997262841588,23.0634205812386,7.4019919943887,18.5414051815933,59.9999999999996,4.61276433953693,15.3697044469956,2.30670292223662,18.0847351992167,12.7991081870174,15.5920222915287,34.2491551973297,33.5790284415873,5.49619140466048,31.8876518244717,12.3291125670644,16.551967740823,27.8872327919838,17.6961947840905,18.1168810390991],"sizemode":"diameter","symbol":"circle","line":{"color":"#FFFFFF","width":2}},"text":["Country: Algeria <br>Life Expectancy: 72.301 <br>GDP: 6223.367465 <br>Pop.: 33333216","Country: Angola <br>Life Expectancy: 42.731 <br>GDP: 4797.231267 <br>Pop.: 12420476","Country: Benin <br>Life Expectancy: 56.728 <br>GDP: 1441.284873 <br>Pop.: 8078314","Country: Botswana <br>Life Expectancy: 50.728 <br>GDP: 12569.85177 <br>Pop.: 1639131","Country: Burkina Faso <br>Life Expectancy: 52.295 <br>GDP: 1217.032994 <br>Pop.: 14326203","Country: Burundi <br>Life Expectancy: 49.58 <br>GDP: 430.0706916 <br>Pop.: 8390505","Country: Cameroon <br>Life Expectancy: 50.43 <br>GDP: 2042.09524 <br>Pop.: 17696293","Country: Central African Republic <br>Life Expectancy: 44.741 <br>GDP: 706.016537 <br>Pop.: 4369038","Country: Chad <br>Life Expectancy: 50.651 <br>GDP: 1704.063724 <br>Pop.: 10238807","Country: Comoros <br>Life Expectancy: 65.152 <br>GDP: 986.1478792 <br>Pop.: 710960","Country: Congo, Dem. Rep. <br>Life Expectancy: 46.462 <br>GDP: 277.5518587 <br>Pop.: 64606759","Country: Congo, Rep. <br>Life Expectancy: 55.322 <br>GDP: 3632.557798 <br>Pop.: 3800610","Country: Cote d'Ivoire <br>Life Expectancy: 48.328 <br>GDP: 1544.750112 <br>Pop.: 18013409","Country: Djibouti <br>Life Expectancy: 54.791 <br>GDP: 2082.481567 <br>Pop.: 496374","Country: Egypt <br>Life Expectancy: 71.338 <br>GDP: 5581.180998 <br>Pop.: 80264543","Country: Equatorial Guinea <br>Life Expectancy: 51.579 <br>GDP: 12154.08975 <br>Pop.: 551201","Country: Eritrea <br>Life Expectancy: 58.04 <br>GDP: 641.3695236 <br>Pop.: 4906585","Country: Ethiopia <br>Life Expectancy: 52.947 <br>GDP: 690.8055759 <br>Pop.: 76511887","Country: Gabon <br>Life Expectancy: 56.735 <br>GDP: 13206.48452 <br>Pop.: 1454867","Country: Gambia <br>Life Expectancy: 59.448 <br>GDP: 752.7497265 <br>Pop.: 1688359","Country: Ghana <br>Life Expectancy: 60.022 <br>GDP: 1327.60891 <br>Pop.: 22873338","Country: Guinea <br>Life Expectancy: 56.007 <br>GDP: 942.6542111 <br>Pop.: 9947814","Country: Guinea-Bissau <br>Life Expectancy: 46.388 <br>GDP: 579.231743 <br>Pop.: 1472041","Country: Kenya <br>Life Expectancy: 54.11 <br>GDP: 1463.249282 <br>Pop.: 35610177","Country: Lesotho <br>Life Expectancy: 42.592 <br>GDP: 1569.331442 <br>Pop.: 2012649","Country: Liberia <br>Life Expectancy: 45.678 <br>GDP: 414.5073415 <br>Pop.: 3193942","Country: Libya <br>Life Expectancy: 73.952 <br>GDP: 12057.49928 <br>Pop.: 6036914","Country: Madagascar <br>Life Expectancy: 59.443 <br>GDP: 1044.770126 <br>Pop.: 19167654","Country: Malawi <br>Life Expectancy: 48.303 <br>GDP: 759.3499101 <br>Pop.: 13327079","Country: Mali <br>Life Expectancy: 54.467 <br>GDP: 1042.581557 <br>Pop.: 12031795","Country: Mauritania <br>Life Expectancy: 64.164 <br>GDP: 1803.151496 <br>Pop.: 3270065","Country: Mauritius <br>Life Expectancy: 72.801 <br>GDP: 10956.99112 <br>Pop.: 1250882","Country: Morocco <br>Life Expectancy: 71.164 <br>GDP: 3820.17523 <br>Pop.: 33757175","Country: Mozambique <br>Life Expectancy: 42.082 <br>GDP: 823.6856205 <br>Pop.: 19951656","Country: Namibia <br>Life Expectancy: 52.906 <br>GDP: 4811.060429 <br>Pop.: 2055080","Country: Niger <br>Life Expectancy: 56.867 <br>GDP: 619.6768924 <br>Pop.: 12894865","Country: Nigeria <br>Life Expectancy: 46.859 <br>GDP: 2013.977305 <br>Pop.: 135031164","Country: Reunion <br>Life Expectancy: 76.442 <br>GDP: 7670.122558 <br>Pop.: 798094","Country: Rwanda <br>Life Expectancy: 46.242 <br>GDP: 863.0884639 <br>Pop.: 8860588","Country: Sao Tome and Principe <br>Life Expectancy: 65.528 <br>GDP: 1598.435089 <br>Pop.: 199579","Country: Senegal <br>Life Expectancy: 63.062 <br>GDP: 1712.472136 <br>Pop.: 12267493","Country: Sierra Leone <br>Life Expectancy: 42.568 <br>GDP: 862.5407561 <br>Pop.: 6144562","Country: Somalia <br>Life Expectancy: 48.159 <br>GDP: 926.1410683 <br>Pop.: 9118773","Country: South Africa <br>Life Expectancy: 49.339 <br>GDP: 9269.657808 <br>Pop.: 43997828","Country: Sudan <br>Life Expectancy: 58.556 <br>GDP: 2602.394995 <br>Pop.: 42292929","Country: Swaziland <br>Life Expectancy: 39.613 <br>GDP: 4513.480643 <br>Pop.: 1133066","Country: Tanzania <br>Life Expectancy: 52.517 <br>GDP: 1107.482182 <br>Pop.: 38139640","Country: Togo <br>Life Expectancy: 58.42 <br>GDP: 882.9699438 <br>Pop.: 5701579","Country: Tunisia <br>Life Expectancy: 73.923 <br>GDP: 7092.923025 <br>Pop.: 10276158","Country: Uganda <br>Life Expectancy: 51.542 <br>GDP: 1056.380121 <br>Pop.: 29170398","Country: Zambia <br>Life Expectancy: 42.384 <br>GDP: 1271.211593 <br>Pop.: 11746035","Country: Zimbabwe <br>Life Expectancy: 43.487 <br>GDP: 469.7092981 <br>Pop.: 12311143"],"type":"scatter","name":"Africa","textfont":{"color":"rgba(74,198,183,1)","size":[29.8107466028207,18.1971495671469,14.6755575444158,6.61060300435124,19.543385335458,14.956442130894,21.7207789006296,10.792626698654,16.5218594383543,4.35368324283851,41.5024010006347,10.0660920623388,21.9145319605078,3.63779948600789,46.2589864862037,3.83344505696074,11.4373104105454,45.1646554235393,6.22796109931411,6.70913673861759,24.6944307003913,16.2853866046767,6.26461228582446,30.8121008634256,7.32517940328621,9.22779116422642,12.6864975293359,22.6057398461855,18.8495822962575,17.910159625556,9.33710918558204,5.77487271428601,29.9997262841588,23.0634205812386,7.4019919943887,18.5414051815933,59.9999999999996,4.61276433953693,15.3697044469956,2.30670292223662,18.0847351992167,12.7991081870174,15.5920222915287,34.2491551973297,33.5790284415873,5.49619140466048,31.8876518244717,12.3291125670644,16.551967740823,27.8872327919838,17.6961947840905,18.1168810390991]},"error_y":{"color":"rgba(74,198,183,1)","width":[]},"error_x":{"color":"rgba(74,198,183,1)","width":[]},"line":{"color":"rgba(74,198,183,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[12779.37964,3822.137084,9065.800825,36319.23501,13171.63885,7006.580419,9645.06142,8948.102923,6025.374752,6873.262326,5728.353514,5186.050003,1201.637154,3548.330846,7320.880262,11977.57496,2749.320965,9809.185636,4172.838464,7408.905561,19328.70901,18008.50924,42951.65309,10611.46299,11415.80569],"y":[75.32,65.554,72.39,80.653,78.553,72.889,78.782,78.273,72.235,74.994,71.878,70.259,60.916,70.198,72.567,76.195,72.899,75.537,71.752,71.421,78.746,69.819,78.242,76.384,73.747],"mode":"markers","marker":{"color":"rgba(25,114,164,1)","size":[32.7791094738549,15.5923463107277,71.174301396112,29.8361904853249,20.8364953071035,34.338449847402,10.4981648378307,17.4465676167662,15.7628010315908,19.1502865500244,13.6020453180676,18.3084871242942,15.0562072476252,14.1251886723439,8.60928238602907,53.833274417581,12.3007275426697,9.29720350084945,13.3322749060159,27.6492985417238,10.2522597286632,5.30751453244921,89.6021497599279,9.58707511652762,26.3710153466013],"sizemode":"diameter","symbol":"circle","line":{"color":"#FFFFFF","width":2}},"text":["Country: Argentina <br>Life Expectancy: 75.32 <br>GDP: 12779.37964 <br>Pop.: 40301927","Country: Bolivia <br>Life Expectancy: 65.554 <br>GDP: 3822.137084 <br>Pop.: 9119152","Country: Brazil <br>Life Expectancy: 72.39 <br>GDP: 9065.800825 <br>Pop.: 190010647","Country: Canada <br>Life Expectancy: 80.653 <br>GDP: 36319.23501 <br>Pop.: 33390141","Country: Chile <br>Life Expectancy: 78.553 <br>GDP: 13171.63885 <br>Pop.: 16284741","Country: Colombia <br>Life Expectancy: 72.889 <br>GDP: 7006.580419 <br>Pop.: 44227550","Country: Costa Rica <br>Life Expectancy: 78.782 <br>GDP: 9645.06142 <br>Pop.: 4133884","Country: Cuba <br>Life Expectancy: 78.273 <br>GDP: 8948.102923 <br>Pop.: 11416987","Country: Dominican Republic <br>Life Expectancy: 72.235 <br>GDP: 6025.374752 <br>Pop.: 9319622","Country: Ecuador <br>Life Expectancy: 74.994 <br>GDP: 6873.262326 <br>Pop.: 13755680","Country: El Salvador <br>Life Expectancy: 71.878 <br>GDP: 5728.353514 <br>Pop.: 6939688","Country: Guatemala <br>Life Expectancy: 70.259 <br>GDP: 5186.050003 <br>Pop.: 12572928","Country: Haiti <br>Life Expectancy: 60.916 <br>GDP: 1201.637154 <br>Pop.: 8502814","Country: Honduras <br>Life Expectancy: 70.198 <br>GDP: 3548.330846 <br>Pop.: 7483763","Country: Jamaica <br>Life Expectancy: 72.567 <br>GDP: 7320.880262 <br>Pop.: 2780132","Country: Mexico <br>Life Expectancy: 76.195 <br>GDP: 11977.57496 <br>Pop.: 108700891","Country: Nicaragua <br>Life Expectancy: 72.899 <br>GDP: 2749.320965 <br>Pop.: 5675356","Country: Panama <br>Life Expectancy: 75.537 <br>GDP: 9809.185636 <br>Pop.: 3242173","Country: Paraguay <br>Life Expectancy: 71.752 <br>GDP: 4172.838464 <br>Pop.: 6667147","Country: Peru <br>Life Expectancy: 71.421 <br>GDP: 7408.905561 <br>Pop.: 28674757","Country: Puerto Rico <br>Life Expectancy: 78.746 <br>GDP: 19328.70901 <br>Pop.: 3942491","Country: Trinidad and Tobago <br>Life Expectancy: 69.819 <br>GDP: 18008.50924 <br>Pop.: 1056608","Country: United States <br>Life Expectancy: 78.242 <br>GDP: 42951.65309 <br>Pop.: 301139947","Country: Uruguay <br>Life Expectancy: 76.384 <br>GDP: 10611.46299 <br>Pop.: 3447496","Country: Venezuela <br>Life Expectancy: 73.747 <br>GDP: 11415.80569 <br>Pop.: 26084662"],"type":"scatter","name":"Americas","textfont":{"color":"rgba(25,114,164,1)","size":[32.7791094738549,15.5923463107277,71.174301396112,29.8361904853249,20.8364953071035,34.338449847402,10.4981648378307,17.4465676167662,15.7628010315908,19.1502865500244,13.6020453180676,18.3084871242942,15.0562072476252,14.1251886723439,8.60928238602907,53.833274417581,12.3007275426697,9.29720350084945,13.3322749060159,27.6492985417238,10.2522597286632,5.30751453244921,89.6021497599279,9.58707511652762,26.3710153466013]},"error_y":{"color":"rgba(25,114,164,1)","width":[]},"error_x":{"color":"rgba(25,114,164,1)","width":[]},"line":{"color":"rgba(25,114,164,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[974.5803384,29796.04834,1391.253792,1713.778686,4959.114854,39724.97867,2452.210407,3540.651564,11605.71449,4471.061906,25523.2771,31656.06806,4519.461171,1593.06548,23348.13973,47306.98978,10461.05868,12451.6558,3095.772271,944,1091.359778,22316.19287,2605.94758,3190.481016,21654.83194,47143.17964,3970.095407,4184.548089,28718.27684,7458.396327,2441.576404,3025.349798,2280.769906],"y":[43.828,75.635,64.062,59.723,72.961,82.208,64.698,70.65,70.964,59.545,80.745,82.603,72.535,67.297,78.623,77.588,71.993,74.241,66.803,62.069,63.785,75.64,65.483,71.688,72.777,79.972,72.396,74.143,78.4,70.616,74.249,73.422,62.698],"mode":"markers","marker":{"color":"rgba(150,95,138,1)","size":[29.1582180925315,4.3463684998245,63.3326912638707,19.410372822792,187.501378170123,13.6418972117167,172.05735953139,77.2002430612506,43.0310092001836,27.0768246914527,13.0896353697621,58.2954666088563,12.7035910686911,24.9246048007079,36.1601883828615,8.17309527512949,10.2246408297757,25.7244669352857,8.75361057221356,35.6841540768892,27.7585396936463,9.24360295999972,67.1776849529985,49.276435792805,27.1266992336397,11.0175111596486,23.3086741407157,22.6923125467564,24.8563583160684,41.6503323222976,47.6774379069196,10.350400448892,24.3346757945111],"sizemode":"diameter","symbol":"circle","line":{"color":"#FFFFFF","width":2}},"text":["Country: Afghanistan <br>Life Expectancy: 43.828 <br>GDP: 974.5803384 <br>Pop.: 31889923","Country: Bahrain <br>Life Expectancy: 75.635 <br>GDP: 29796.04834 <br>Pop.: 708573","Country: Bangladesh <br>Life Expectancy: 64.062 <br>GDP: 1391.253792 <br>Pop.: 150448339","Country: Cambodia <br>Life Expectancy: 59.723 <br>GDP: 1713.778686 <br>Pop.: 14131858","Country: China <br>Life Expectancy: 72.961 <br>GDP: 4959.114854 <br>Pop.: 1318683096","Country: Hong Kong, China <br>Life Expectancy: 82.208 <br>GDP: 39724.97867 <br>Pop.: 6980412","Country: India <br>Life Expectancy: 64.698 <br>GDP: 2452.210407 <br>Pop.: 1110396331","Country: Indonesia <br>Life Expectancy: 70.65 <br>GDP: 3540.651564 <br>Pop.: 223547000","Country: Iran <br>Life Expectancy: 70.964 <br>GDP: 11605.71449 <br>Pop.: 69453570","Country: Iraq <br>Life Expectancy: 59.545 <br>GDP: 4471.061906 <br>Pop.: 27499638","Country: Israel <br>Life Expectancy: 80.745 <br>GDP: 25523.2771 <br>Pop.: 6426679","Country: Japan <br>Life Expectancy: 82.603 <br>GDP: 31656.06806 <br>Pop.: 127467972","Country: Jordan <br>Life Expectancy: 72.535 <br>GDP: 4519.461171 <br>Pop.: 6053193","Country: Korea, Dem. Rep. <br>Life Expectancy: 67.297 <br>GDP: 1593.06548 <br>Pop.: 23301725","Country: Korea, Rep. <br>Life Expectancy: 78.623 <br>GDP: 23348.13973 <br>Pop.: 49044790","Country: Kuwait <br>Life Expectancy: 77.588 <br>GDP: 47306.98978 <br>Pop.: 2505559","Country: Lebanon <br>Life Expectancy: 71.993 <br>GDP: 10461.05868 <br>Pop.: 3921278","Country: Malaysia <br>Life Expectancy: 74.241 <br>GDP: 12451.6558 <br>Pop.: 24821286","Country: Mongolia <br>Life Expectancy: 66.803 <br>GDP: 3095.772271 <br>Pop.: 2874127","Country: Myanmar <br>Life Expectancy: 62.069 <br>GDP: 944 <br>Pop.: 47761980","Country: Nepal <br>Life Expectancy: 63.785 <br>GDP: 1091.359778 <br>Pop.: 28901790","Country: Oman <br>Life Expectancy: 75.64 <br>GDP: 22316.19287 <br>Pop.: 3204897","Country: Pakistan <br>Life Expectancy: 65.483 <br>GDP: 2605.94758 <br>Pop.: 169270617","Country: Philippines <br>Life Expectancy: 71.688 <br>GDP: 3190.481016 <br>Pop.: 91077287","Country: Saudi Arabia <br>Life Expectancy: 72.777 <br>GDP: 21654.83194 <br>Pop.: 27601038","Country: Singapore <br>Life Expectancy: 79.972 <br>GDP: 47143.17964 <br>Pop.: 4553009","Country: Sri Lanka <br>Life Expectancy: 72.396 <br>GDP: 3970.095407 <br>Pop.: 20378239","Country: Syria <br>Life Expectancy: 74.143 <br>GDP: 4184.548089 <br>Pop.: 19314747","Country: Taiwan <br>Life Expectancy: 78.4 <br>GDP: 28718.27684 <br>Pop.: 23174294","Country: Thailand <br>Life Expectancy: 70.616 <br>GDP: 7458.396327 <br>Pop.: 65068149","Country: Vietnam <br>Life Expectancy: 74.249 <br>GDP: 2441.576404 <br>Pop.: 85262356","Country: West Bank and Gaza <br>Life Expectancy: 73.422 <br>GDP: 3025.349798 <br>Pop.: 4018332","Country: Yemen, Rep. <br>Life Expectancy: 62.698 <br>GDP: 2280.769906 <br>Pop.: 22211743"],"type":"scatter","name":"Asia","textfont":{"color":"rgba(150,95,138,1)","size":[29.1582180925315,4.3463684998245,63.3326912638707,19.410372822792,187.501378170123,13.6418972117167,172.05735953139,77.2002430612506,43.0310092001836,27.0768246914527,13.0896353697621,58.2954666088563,12.7035910686911,24.9246048007079,36.1601883828615,8.17309527512949,10.2246408297757,25.7244669352857,8.75361057221356,35.6841540768892,27.7585396936463,9.24360295999972,67.1776849529985,49.276435792805,27.1266992336397,11.0175111596486,23.3086741407157,22.6923125467564,24.8563583160684,41.6503323222976,47.6774379069196,10.350400448892,24.3346757945111]},"error_y":{"color":"rgba(150,95,138,1)","width":[]},"error_x":{"color":"rgba(150,95,138,1)","width":[]},"line":{"color":"rgba(150,95,138,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[5937.029526,36126.4927,33692.60508,7446.298803,10680.79282,14619.22272,22833.30851,35278.41874,33207.0844,30470.0167,32170.37442,27538.41188,18008.94444,36180.78919,40675.99635,28569.7197,9253.896111,36797.93332,49357.19017,15389.92468,20509.64777,10808.47561,9786.534714,18678.31435,25768.25759,28821.0637,33859.74835,37506.41907,8458.276384,33203.26128],"y":[76.423,79.829,79.441,74.852,73.005,75.748,76.486,78.332,79.313,80.657,79.406,79.483,73.338,81.757,78.885,80.546,74.543,79.762,80.196,75.563,78.098,72.476,74.002,74.663,77.926,80.941,80.884,81.701,71.777,79.425],"mode":"markers","marker":{"color":"rgba(255,112,112,1)","size":[9.79753986956979,14.7854798704742,16.6451815378325,11.016529874582,13.9725139222709,10.9450445204237,16.5137383582916,12.0740581481683,11.8177843492483,40.3550305403444,46.8705959219414,16.8948268870131,16.2921741689765,2.83718788940493,10.466629714471,39.373193255245,4.27263531162072,21.0185877412528,11.1077845562529,32.0455306629742,16.8446863846955,24.3698802530371,16.4502663877026,12.0512735312115,7.31898223161382,32.8385366766027,15.5168757204585,14.1919389804842,43.55600967728,40.2532686477573],"sizemode":"diameter","symbol":"circle","line":{"color":"#FFFFFF","width":2}},"text":["Country: Albania <br>Life Expectancy: 76.423 <br>GDP: 5937.029526 <br>Pop.: 3600523","Country: Austria <br>Life Expectancy: 79.829 <br>GDP: 36126.4927 <br>Pop.: 8199783","Country: Belgium <br>Life Expectancy: 79.441 <br>GDP: 33692.60508 <br>Pop.: 10392226","Country: Bosnia and Herzegovina <br>Life Expectancy: 74.852 <br>GDP: 7446.298803 <br>Pop.: 4552198","Country: Bulgaria <br>Life Expectancy: 73.005 <br>GDP: 10680.79282 <br>Pop.: 7322858","Country: Croatia <br>Life Expectancy: 75.748 <br>GDP: 14619.22272 <br>Pop.: 4493312","Country: Czech Republic <br>Life Expectancy: 76.486 <br>GDP: 22833.30851 <br>Pop.: 10228744","Country: Denmark <br>Life Expectancy: 78.332 <br>GDP: 35278.41874 <br>Pop.: 5468120","Country: Finland <br>Life Expectancy: 79.313 <br>GDP: 33207.0844 <br>Pop.: 5238460","Country: France <br>Life Expectancy: 80.657 <br>GDP: 30470.0167 <br>Pop.: 61083916","Country: Germany <br>Life Expectancy: 79.406 <br>GDP: 32170.37442 <br>Pop.: 82400996","Country: Greece <br>Life Expectancy: 79.483 <br>GDP: 27538.41188 <br>Pop.: 10706290","Country: Hungary <br>Life Expectancy: 73.338 <br>GDP: 18008.94444 <br>Pop.: 9956108","Country: Iceland <br>Life Expectancy: 81.757 <br>GDP: 36180.78919 <br>Pop.: 301931","Country: Ireland <br>Life Expectancy: 78.885 <br>GDP: 40675.99635 <br>Pop.: 4109086","Country: Italy <br>Life Expectancy: 80.546 <br>GDP: 28569.7197 <br>Pop.: 58147733","Country: Montenegro <br>Life Expectancy: 74.543 <br>GDP: 9253.896111 <br>Pop.: 684736","Country: Netherlands <br>Life Expectancy: 79.762 <br>GDP: 36797.93332 <br>Pop.: 16570613","Country: Norway <br>Life Expectancy: 80.196 <br>GDP: 49357.19017 <br>Pop.: 4627926","Country: Poland <br>Life Expectancy: 75.563 <br>GDP: 15389.92468 <br>Pop.: 38518241","Country: Portugal <br>Life Expectancy: 78.098 <br>GDP: 20509.64777 <br>Pop.: 10642836","Country: Romania <br>Life Expectancy: 72.476 <br>GDP: 10808.47561 <br>Pop.: 22276056","Country: Serbia <br>Life Expectancy: 74.002 <br>GDP: 9786.534714 <br>Pop.: 10150265","Country: Slovak Republic <br>Life Expectancy: 74.663 <br>GDP: 18678.31435 <br>Pop.: 5447502","Country: Slovenia <br>Life Expectancy: 77.926 <br>GDP: 25768.25759 <br>Pop.: 2009245","Country: Spain <br>Life Expectancy: 80.941 <br>GDP: 28821.0637 <br>Pop.: 40448191","Country: Sweden <br>Life Expectancy: 80.884 <br>GDP: 33859.74835 <br>Pop.: 9031088","Country: Switzerland <br>Life Expectancy: 81.701 <br>GDP: 37506.41907 <br>Pop.: 7554661","Country: Turkey <br>Life Expectancy: 71.777 <br>GDP: 8458.276384 <br>Pop.: 71158647","Country: United Kingdom <br>Life Expectancy: 79.425 <br>GDP: 33203.26128 <br>Pop.: 60776238"],"type":"scatter","name":"Europe","textfont":{"color":"rgba(255,112,112,1)","size":[9.79753986956979,14.7854798704742,16.6451815378325,11.016529874582,13.9725139222709,10.9450445204237,16.5137383582916,12.0740581481683,11.8177843492483,40.3550305403444,46.8705959219414,16.8948268870131,16.2921741689765,2.83718788940493,10.466629714471,39.373193255245,4.27263531162072,21.0185877412528,11.1077845562529,32.0455306629742,16.8446863846955,24.3698802530371,16.4502663877026,12.0512735312115,7.31898223161382,32.8385366766027,15.5168757204585,14.1919389804842,43.55600967728,40.2532686477573]},"error_y":{"color":"rgba(255,112,112,1)","width":[]},"error_x":{"color":"rgba(255,112,112,1)","width":[]},"line":{"color":"rgba(255,112,112,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[34435.36744,25185.00911],"y":[81.235,80.204],"mode":"markers","marker":{"color":"rgba(198,25,81,1)","size":[23.3406426490572,10.4751402426957],"sizemode":"diameter","symbol":"circle","line":{"color":"#FFFFFF","width":2}},"text":["Country: Australia <br>Life Expectancy: 81.235 <br>GDP: 34435.36744 <br>Pop.: 20434176","Country: New Zealand <br>Life Expectancy: 80.204 <br>GDP: 25185.00911 <br>Pop.: 4115771"],"type":"scatter","name":"Oceania","textfont":{"color":"rgba(198,25,81,1)","size":[23.3406426490572,10.4751402426957]},"error_y":{"color":"rgba(198,25,81,1)","width":[]},"error_x":{"color":"rgba(198,25,81,1)","width":[]},"line":{"color":"rgba(198,25,81,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="chart-c" class="section level3">
+<h3>Chart C</h3>
+<div class="knitr-options" data-fig-width="576" data-fig-height="460">
+
+</div>
+<div id="htmlwidget-3799f1b2220bd59de8d7" style="width:576px;height:460.8px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3799f1b2220bd59de8d7">{"x":{"visdat":{"2e5437683c2":["function () ","plotlyVisDat"]},"cur_data":"2e5437683c2","attrs":{"2e5437683c2":{"alpha":0.6,"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"type":"histogram","inherit":true},"2e5437683c2.1":{"alpha":0.6,"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"type":"histogram","inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"barmode":"overlay","xaxis":{"domain":[0,1],"automargin":true,"title":"rnorm(500)"},"yaxis":{"domain":[0,1],"automargin":true},"hovermode":"closest","showlegend":true},"source":"A","config":{"showSendToCloud":false},"data":[{"x":[-1.2817590356454,-0.501822853164401,0.598872640165606,0.445048206423373,0.939055455257896,-0.282519572514824,-0.537695713192702,0.604713430090611,0.851635623256887,-0.311534429426884,0.372870394363607,-0.38169220138454,0.791555398699261,-0.524037260983311,0.0971552999666121,-0.974223337844953,0.0545809746083702,0.56258321050681,-0.85246367845423,0.0530994661712282,0.858370359864231,-0.159869738030631,0.0388334568582033,0.590771325692384,0.307492057386279,0.415505997546421,2.10628837567217,-0.707175651131829,-0.501710251427248,1.0127763074101,-0.00193217345701146,-0.875446029106343,0.468293741739386,-0.267627665032601,-0.455750701082398,1.46072484437306,-0.0728211231277094,1.09898771821335,-0.0128850357918191,-1.51048675179998,0.531001191261613,-0.817631227019616,0.618938737919398,-0.0287250718752686,0.504944058059235,0.307887088335715,-0.170765631825445,-0.701672334900866,-0.14811712603134,1.58227486626396,0.601049490931757,-1.20634815172356,-0.292208266971731,-0.294741350974291,-0.648435559388502,0.747752207386536,0.401513841494136,0.789797421649631,1.5566810487922,-0.53313551315705,0.0527996346021449,-0.345483215218388,-0.411899892013,0.539398702386746,0.402526435420463,-0.272694618188995,0.993688887112838,2.19776311622006,0.970798764011335,0.138046937768278,0.820590407702826,-0.226149932867615,0.993791388340685,0.835320216739704,0.183039392814865,-0.743176081377006,1.03273537454726,-0.714544452150044,-1.10195048129396,0.521751529973492,-0.350295838221496,1.76303987110951,0.470603255513063,1.13506655691495,-0.0642663445316901,-1.36478932405487,-1.05218573932718,-0.313370790685592,-0.100769860567979,1.50027391776744,1.62470394205123,1.23939277372333,0.206464360015499,-0.640256498024925,-0.663391645660826,1.13744295272741,1.37238373519927,1.20541430103434,2.48220249756327,-1.59261276086542,-0.630620821863879,0.287217463528485,-0.361187311742407,0.528943579433919,-0.285632847777656,1.90273590847491,-3.0437511772895,0.275568197459797,0.621518306665274,1.46392277502168,0.460252470981485,0.958577763316536,0.301983033585785,0.635144119387717,-0.245390324115544,-1.505279035006,-0.26360389377349,-0.193722282897027,-1.85603943681827,-1.13340791886508,0.127873635532824,0.155826783359652,-0.0521257963211216,-1.16264058663503,0.492532419305764,-0.438324270053765,-1.32968999190744,-0.350673601790434,0.183197218348967,-0.89604925603981,-0.188506607620874,0.729712266997615,-1.35688786651504,1.00929421036742,0.215544449303054,-1.36461247642246,0.533698818805567,-0.079313501644053,-0.359753321285411,0.337768998985969,-0.517174332741369,-0.994880036054138,-2.04486574633909,0.343348199590035,1.8294131850215,1.13276841470634,-0.098577641696571,0.153829178979808,-0.717749948908089,1.47199635107389,1.71270349291167,0.777820261474743,0.737079409800149,0.0474209453017302,-0.532809532633233,0.637889586800488,-1.46587921941092,0.336568316818347,-0.139795498699976,0.8032138678117,0.414869485141737,-0.372550663871486,-0.0749656183451579,0.824334175666871,-0.411905550367317,0.531420524096096,2.02401545566086,-0.814847038826536,-2.13813402317769,0.513630145667985,1.93053150151955,-0.978712997592528,-0.334550141963875,0.276811896395613,1.1336565224247,0.162097066633461,-1.44842363542514,-0.0800417151677265,0.299377910723489,-0.525688227991477,0.490552968425844,0.0127975247176512,-0.096706362729253,-1.25309343872132,-1.02569187711369,0.400552206157732,1.51921368821243,-0.599157932669553,-0.447334248883172,-0.0667572329552508,0.0505432129870617,-0.160358500486798,-1.23396706701206,1.07689661021663,-0.118445981645373,-0.337224459869736,-0.490124199450348,-1.18753068935424,0.47028253454732,-0.392279525160073,-0.371963675255943,1.13736930061389,-1.48181373786915,1.12260605901347,-1.25150845041822,-0.482945707584046,1.4141526285014,-0.115920718504236,0.676176455968974,0.400641068531995,0.191321318982856,0.8714798100015,-0.438061282456381,0.535922745826721,-0.212502957766221,-0.0180539402277374,0.173734078488019,-0.1521400145342,-1.012727740887,-0.424996614658474,0.991838965217649,-1.74056044435754,1.26840405763874,0.253668581099812,1.0811630149275,0.130459182409124,-0.507681743399787,0.377815941295407,1.58709313366178,-0.750362867051064,0.224297773893144,0.323201992306232,0.661895356666811,0.449052801758426,-1.54804601064091,0.865040949475278,0.749372923890264,1.09415232311948,-1.44638171544252,1.1555684596529,0.941802470905793,-2.55424177389118,-1.97614960160444,0.332736747002385,-0.143641285464184,-0.798745713173674,-0.396503896693754,-1.13983834338172,0.98049648842057,0.121148733907083,0.332792578708525,-0.535393685107918,-1.03520150786513,0.414199600654451,-1.01469902266837,-0.20291213449958,-1.34240166574111,-0.15419000994305,-1.35360761013846,-1.49488905364463,0.296945300412724,1.20439866703483,-0.633384143248101,-1.25318019587998,-0.121185235559267,-0.107768131111069,-1.46476284912935,0.10494914068928,-1.45106142296915,1.23983688693633,-0.989795177778478,0.40504795299136,0.0325926865659893,-0.596162386835858,-1.12979190800278,-0.186930225022124,-0.6139789974441,-0.497196907396219,-0.0105586079769438,0.595161701970684,-1.83250107537053,-0.0748095888124204,-0.195428883995505,-1.61991466879954,0.768013534181806,-0.762450841789344,0.419623090387891,-0.77526698158752,0.104399313266356,-1.70209663300671,0.0866435743559672,-0.517748201907735,-0.582734659877634,0.500170531443442,-0.758307983484572,-2.01143465797284,0.821393608173224,0.432024871816134,-1.07172152183585,0.460930803833421,-0.695307987197697,0.119289612318994,-1.17550602205998,-1.44510463004026,-0.289659466601429,-0.880594246738404,0.873036327307726,-0.876531706883879,-0.612196625708811,2.02156005185574,-0.108694533741992,0.518036922391292,1.8705226022772,0.231313792374444,0.966465493871262,2.41507525238217,1.44321327222531,1.16555032183346,0.0759692326979375,0.897032513558811,-1.81440109395596,1.22143986901729,-0.204499387137693,-1.1415424679894,-2.20227300618788,0.292443572345744,0.738705684554254,-0.802931046714114,-0.174455151849595,-0.457649857788569,0.243651790858893,-0.478607394242305,0.158668151667375,0.66531876222095,-1.2199214600855,0.27596292227921,1.46392719967288,0.660732715805116,1.15449493964824,0.720476298720656,-0.204118264134616,-0.903871183346567,-0.149954622252451,-0.116896655508357,0.062502116728874,-0.677157009779332,0.827399660963251,0.983982196874003,0.134451517895383,0.416796965469823,0.792755693537086,0.557178157771621,1.75108438041532,-0.0501384127980705,-0.653928663396088,-0.998237742950029,0.171327575588546,0.211309942217946,0.207442838791112,0.548847208969491,1.3401591446921,0.208027970763206,-0.404494845771137,-1.35649437023637,0.208345175658254,-0.202578887040084,0.300769949067957,-0.0431766029739082,-0.0871642059346618,0.760411229376318,0.294653346586365,0.545267936500692,-0.0248481254645219,-0.877629042816574,-0.268256059506819,-0.604542614822521,1.7848338781696,-0.594196829579635,-0.988825010546738,-0.598855836463474,-0.675245759941883,0.680860816720916,-0.367209336024545,1.50170979333641,0.295354705483112,0.0280759435144372,0.472991359345688,-0.384531028300646,0.307029974229012,0.699639323964765,-0.434638662806424,0.704085653576979,-0.899525478771493,-1.54814369665368,0.137735150399812,1.4870206771485,-1.14008612201646,1.08742579559932,-1.17684885900939,0.226355220593973,-2.0191113415365,0.251379043448056,-1.82813813969415,0.616526856896605,-0.253771783199721,1.2319611256724,-0.27898923592118,-0.235926735248497,-0.258167791572574,1.64488410471494,-1.53926702598714,0.303775450657673,-0.871210389917268,-0.372534853756272,0.308729592581764,-1.03194925763262,-0.0337557170075391,0.716910308875452,-0.182635525590958,-2.33746794996164,1.96969367406816,-0.18541626499922,0.215149543350877,-0.848598902303939,0.893440822625426,0.077542719205744,0.435417467806835,-0.47900921383831,-0.817762404098784,-0.323318055401461,0.455767511468377,0.0226855128015765,-1.39148042604581,-1.637462011598,0.790785884997137,0.625975606704141,-0.0597938689498353,1.09353709467147,1.02226788535267,-0.919583865597624,1.2359382141951,1.38671928766567,-1.30518371865537,0.0226048723355043,2.54507064196505,-0.73960452387661,0.475060515733202,-0.137122596627554,-0.316964543144006,0.0281304596111466,-1.51041526384084,-0.651461967205031,-1.04136041500203,-1.56373586858207,-1.11464687210883,1.23132659567414,0.512975339671426,0.469862693620673,-0.955956147868454,1.14386785749983,-0.919946600106092,0.218082165464181,-0.36920104790106,-1.74234443731497,-0.319796443302253,0.727766910623443,0.271121518994083,0.184529408267257,1.88627186770585,2.1030319850507,-0.575781517742712,-0.191130483966044,-0.445093704268908,-0.333406355372128,-0.124495991684262,1.00454593269634,2.14127888941318,1.17800329702018,0.539980611853567,0.940570810033139,1.28734531376449,1.61615765469473,0.401331535547894,1.01211746460395,-1.2277213412401,-0.071002327324128,-0.919784549707492,-0.51297859896613,0.293475991926971,-0.22511451507364,0.439720760413272,1.43795091547437,-0.656986862035372,0.398039753693643,-0.1082567348655,1.60411771085305,-1.28235114719999,1.33842133885527,-1.85218694573658,-1.33324593417207],"type":"histogram","marker":{"color":"rgba(31,119,180,0.6)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,0.6)"},"error_x":{"color":"rgba(31,119,180,0.6)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[1.51684715967484,0.732046871187965,1.98838932299018,0.605054108865604,0.83250286283682,1.35781485035331,-0.353612371167485,1.09619183765065,0.39767190574351,3.73080624361077,0.705904418167576,0.0784496986339924,0.635060181766636,1.01496670884957,1.26166663603833,0.153450978340259,3.17345186636024,2.30695010817184,-0.238293947055995,0.862642072420665,0.380505187998683,1.5394940135022,1.78902138068651,1.43723007718702,-0.0334717632386914,1.64652349323228,1.57884649839771,2.16096271042346,2.06586712045697,0.730452265402411,0.0967992294298728,1.95387974767447,0.194182652446487,-0.0437361964727092,-0.0986375618070345,0.00423056364947338,0.960170115778297,0.855129206298254,1.55776187408199,2.35603536091827,1.84904303527387,0.104231735287908,0.505932080600777,2.43298895097412,1.11917788758534,-1.14638856818064,1.30807766406367,0.455753875383039,0.058284919292204,2.0625553176237,1.58916677372191,-1.19778834122478,0.467412336952077,1.19045967064358,2.10937564833035,1.59855324045959,2.63406121708272,1.49877463394515,1.36066407735385,1.18614605543491,0.0953176177800485,-0.596847402021659,0.830713219088315,-0.732117793018742,0.391606354085219,2.31205784299975,0.0223111093139563,2.08899836207283,1.0811027251507,0.316557394633694,0.388294420690745,-0.692266741962122,0.344183251476903,2.08657769016946,0.846297347338967,-1.28277632657459,2.70962847162753,-0.821701299880074,1.96667091831695,3.04773685300376,0.666095879913916,-0.359778578558068,1.8226753879237,0.860585885001934,0.192961852615806,1.27737628188366,0.449003278468706,1.52931940483398,1.43417176035782,0.359324786861259,-0.26968987457103,0.855587982683334,-0.511260735478737,1.48576370677634,1.28177144371648,-0.155888586108675,0.196442974629013,0.647961357719838,3.03623848335575,-0.251223367549697,0.0444102077474677,1.54773175738841,1.73106847199211,1.55165182405276,1.70482965053972,1.93877458523471,1.9444126451777,3.30178071672667,0.916717411092701,1.84541580243334,0.52518521547478,1.53216110484441,0.493363209613507,2.14895019206277,2.51598504327958,2.42386241020445,4.40139318900562,2.2765618761991,1.0787925915642,1.43074793980806,0.860507639157922,1.23167628724621,0.531997333594898,3.38773188836003,-0.0707883321337728,2.93278533409972,1.20033179411963,-0.545503325895604,2.94188886949417,1.98178167659901,0.96117013739945,1.27775587455785,-0.568117343184325,2.21013259777009,1.87357293241653,1.2259557325961,0.551566894746737,0.249284643937155,1.58621073083076,-0.1181827763507,-0.0803819730149664,1.28400780753034,1.26977931223692,0.470851502655424,0.67268494112983,2.14942425004104,1.23220201979609,1.58729479053518,0.105007567013851,1.61625882740534,2.37536218258635,0.700975515733492,1.60191030371612,2.45229318821939,2.05655389964143,-0.120738401714893,0.0994665105191392,0.622477485704593,1.1261552850313,2.35109161412185,0.0565342243407188,0.497510686993691,0.768581600350173,0.983535647971192,0.075758985348057,2.772146400334,2.54752122460785,1.14144235052,1.09375778358142,-1.14911879280112,0.203385474850706,1.96160637458189,1.89551996215218,-0.0706877609997056,2.34931499999135,-0.255604606775699,0.867545472105774,-0.0991410220547433,1.26450634308771,2.88939078551431,0.0792675110798372,2.20884561990893,-0.245466284970917,0.105063630898506,0.453988131754818,1.14426281188355,1.6921712390335,1.48893046295377,0.117175426301291,1.40907511121079,0.933487847009617,1.22531909032165,2.16567477198153,-0.353165682549446,2.1107708848302,0.279057684076372,0.835229493121854,-0.266936547974274,2.0698493899112,1.60519210769247,2.48905348432805,1.07029220042222,0.715507174985968,-0.192310308354077,1.83228736363356,1.95705222582204,-0.110974208092353,1.07435408556053,1.45805283506002,-0.111276017058375,0.203920929963265,1.04470301895025,1.35365119426662,1.74768237658035,1.02675773199657,0.231938925336642,2.02004581166286,3.25379074594093,1.03240078898143,0.784302035540279,0.630184397228252,1.84074872747869,-0.726252269624836,2.49052352902807,1.68593729778787,0.173305133571995,-0.0966468564583323,0.372379530077579,-0.299263770299336,0.865213877682739,2.61036584595288,2.19353921108273,0.876875518576637,-0.342905269216287,1.42409831570546,0.988748021094022,-0.282657239066572,1.64558493486058,1.20772492678959,2.20435339923781,2.61879120124253,2.02889770086578,-0.0748810400095938,-0.145323847070762,2.22332110586481,1.67573912910041,-0.0343821882416648,-0.0368714172198341,-0.109857411804311,2.00243013765239,-0.694394633865425,1.1067552417851,0.637262984955295,-1.26503014707047,-0.994454477647345,0.143903256381834,1.5553724345316,0.419355976606692,1.01430496547011,2.19628515403034,-0.381655446609209,0.730058256449284,1.10494493424962,2.40461088193343,2.16637036001942,0.953006794856763,0.367918122526676,1.3048273600901,-0.537855720471536,1.29251479546871,-1.19647505697026,1.18846889199672,-0.356386259128163,0.485414222519094,0.767187917524264,1.27867882412834,1.90134418850635,-0.307446308831714,2.05497529441559,0.728930622463906,1.97643113529398,1.90007859675926,-0.614313520133913,1.80839394750626,1.52230702398659,0.626864859098621,0.933618178342256,2.27216531323245,-0.190683623978498,0.844193636676804,-0.00409076783311302,2.27689326697994,-1.20492294684778,0.446333711598183,0.333370451836454,1.2156374895175,0.435715272071397,-0.2108658205863,1.18768103406422,0.826326291129867,-0.209963168620471,0.0854850930745286,0.00679420517714902,2.33864023847266,1.05478130453115,-0.0603791685638373,0.373800511081888,0.645816794237322,3.55661613563034,1.93374645389463,-0.644096512276528,1.08116597498585,-0.511786474965005,2.31551128673198,-0.300365896843238,0.306940303819334,0.699512001867457,1.77924008328502,1.32182898734084,0.415964683191989,3.0133094987347,1.01021960846692,0.963989078565241,0.711962603350611,0.86197072196508,1.0660580468092,2.34069818655811,0.990443143389254,2.10795620553691,1.36503948491659,-0.119300682375054,0.933174542682581,1.38287776922,1.08744161734351,0.261348001392779,0.446658489427952,1.26668434351921,1.2500569519594,0.748603263877363,-1.62268237572667,1.29166673548901,-0.356831351546224,2.14488190227416,0.706501382669605,1.03329520202078,0.821197721957858,0.743759048747579,1.38907549976907,2.20329523888327,1.0494753970814,-1.59443968681688,0.945178662625615,1.73417735809787,0.493296147220361,0.0488705200629718,0.417764792086531,0.278331992766435,0.144175763050015,1.01794427651039,1.70450597915285,1.86864112294045,-2.11531678839826,2.54489979492477,-1.71419763832223,1.57494015502778,0.0272796144417067,1.24330552536169,1.01273999594826,2.13021280237333,-0.571170100060614,1.47038473318817,-0.828270567004398,0.589852424540955,2.67430061330879,0.315603911464478,-0.565239214977991,0.707576545001154,1.806761858287,0.811891264481213,2.752458619271,1.25806521537478,2.08078068648321,0.554561764244502,1.52826319499259,0.989264854856109,0.463283955795431,2.18384614336995,1.76964414694506,0.943240351066899,2.66672316116526,0.773914822031327,1.44605010504994,0.360795259747387,1.77809915795361,0.453418149300254,2.00932712046686,-0.681404411109085,-0.0427501376205615,0.334889873866369,0.528942550157737,0.713786362918711,-0.785024871681339,0.86391277131469,0.515820039698061,2.27188402010756,1.02154964859847,2.53381700610162,0.413753024936934,-0.177064034084819,0.95413694330468,0.653004051700382,2.17080031130174,0.742374770990441,1.10861163368282,1.69847451895762,0.878962548614814,0.827356150986109,1.73528990157522,1.36376361563527,2.57947703680672,-0.18387718561732,0.070659548478001,2.51053918407157,2.00723664534757,3.50315387400169,1.37425472520968,0.415175722496353,0.575418718933402,0.784244654552773,-0.161208011273481,0.817128120242015,-0.822041874498594,0.914937209145988,-0.214369334649896,0.572947837666751,2.48818725668614,1.24879916343394,0.775351388771982,2.31654042952845,-0.283103477842475,1.66136498082817,2.10642382589102,1.22084685944391,0.548813119439615,1.00142009696596,0.199471103406478,1.46661451826355,-0.416915191590768,1.43259250553973,-0.341970834625988,2.21314962471873,0.825827846752227,0.529661487745046,0.0702868128134008,0.820924095275285,0.078990974170563,-0.0441882432158947,1.60518527766079,1.64152472900441,0.408435087236019,2.68619258436383,2.50243492088187,1.18396691984076,0.737689985583514,-0.0136079987391251,0.571462820194517,0.601906024673602,0.59584569040582,0.889997746094009,1.56828668785322,2.19169676010703,0.66711893552124,0.115337024812896,-0.334788121647596,1.72349365669065,-0.674320275296485,1.59132951350067,1.04261106437393,0.309640169088085,1.59396341641904,1.8583180421085,2.14254434444064,0.188088842022871,2.82100144881468,2.64486544941707,0.883419820878022,1.2441078995207,1.32784594105371,-0.659558648498776,-0.215122088873755,-0.222935976880445,0.900945293327655,1.13867135229338,1.75332970960525,0.547009534856715,2.24603602631283,1.21950971992335,-0.284120677785815,-0.0707932879573974,1.69606544558543],"type":"histogram","marker":{"color":"rgba(255,127,14,0.6)","line":{"color":"rgba(255,127,14,1)"}},"error_y":{"color":"rgba(255,127,14,0.6)"},"error_x":{"color":"rgba(255,127,14,0.6)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+
+</div>
+
+<script>
+
+$(document).ready(function () {
+
+  // add bootstrap table styles to pandoc tables
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+
+  // initialize mathjax
+  var script = document.createElement("script");
+  script.type = "text/javascript";
+  script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+  document.getElementsByTagName("head")[0].appendChild(script);
+
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function () {
+  FlexDashboard.init({
+    theme: "cosmo",
+    fillPage: true,
+    orientation: "columns",
+    storyboard: false,
+    defaultFigWidth: 576,
+    defaultFigHeight: 460,
+    defaultFigWidthMobile: 360,
+    defaultFigHeightMobile: 460,
+    resize_reload: true
+  });
+});
+</script>
+
+</body>
+</html>
